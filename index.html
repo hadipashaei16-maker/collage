@@ -1,0 +1,721 @@
+<html lang="fa" class="k-webkit k-webkit149"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Metro, a sleek, intuitive, and powerful framework for faster and easier web development for Windows Metro Style.">
+    <meta name="keywords" content="سیستم آموزش, سیستم جامع آموزش,سیستم جامع دانشگاهی, سیستم مدیریت آموزش,">
+    <meta name="author" content="samasoft sama, سما سامانه, سما, samasoft.net">
+	
+
+    <link href="https://uastcdn.uast.ac.ir/CDN/images/favicon.ico" rel="shortcut icon">
+    <title>Applications - samasoft</title>
+    <link href="https://uastcdn.uast.ac.ir/CDN/css/bundle/cas-all-0.0.4.css" rel="stylesheet">
+    
+    <link href="https://uastcdn.uast.ac.ir/CDN/css/kendo-ui/bundle-kendo.css" rel="stylesheet">
+    <script src="https://uastcdn.uast.ac.ir/CDN/js/bundle/cas-head-all-0.0.1.js"></script>
+
+    <script src="https://uastcdn.uast.ac.ir/CDN/js/bundle/cas-footer-all-0.0.1.js"></script>
+    <script src="https://uastcdn.uast.ac.ir/CDN/js/kendo-ui/new/kendo.editable.min.js"></script>
+
+    <style>
+        .form-control.readonly {
+            background-color: #eee;
+            opacity: 1;
+            -webkit-user-select: text !important;
+            -moz-user-select: text !important;
+            -ms-user-select: text !important;
+            -o-user-select: text !important;
+            user-select: text !important;
+        }
+    </style>
+
+</head>
+<body>
+
+    
+<style>
+    #ticket-panel {
+        background-color: white;
+        height: 150px;
+        left: 350px;
+        position: absolute;
+        /*top: 45px;*/
+        width: 350px;
+        z-index: 1000;
+        box-shadow: 1px 1px 10px #888888;
+        border-radius: 3px;
+        padding: 10px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    span.tel {
+        float: left;
+        direction: ltr;
+        text-align: left;
+        margin: 5px;
+    }
+
+    #HamavaHelp .grow {
+        /*text-shadow: 1px 1px 2px black, 0 0 1em white, 0 0 0.2em white;
+        color: yellow;*/
+        animation: fa-spin 5s infinite cubic-bezier(.6,-0.28,.74,.05);
+    }
+
+    /*.grow:hover {
+            text-shadow: 0 2px 2px gray;
+            color: white;
+            -webkit-transform: scale(1.9);
+            -ms-transform: scale(1.9);
+            transform: scale(1.9);
+        }*/
+    #HamavaHelp .not-active {
+        color: silver;
+    }
+
+    .numberCircle {
+        border-radius: 50%;
+        behavior: url(PIE.htc);
+        width: 16px;
+        height: 16px;
+        padding: 3px;
+        background: #e45252;
+        border: 2px solid #666;
+        color: #fff;
+        text-align: center;
+        font-size: 12px;
+    }
+</style>
+<header class="app-bar navy" data-role="appbar">
+    <span class="app-bar-pull">
+        <a href="javascript:MenuClicked();" class="app-bar-element place-right branding"><span class="fa fa-bars"></span><span class="font-koodakBold" style="font-size:14pt"> دسترسی</span></a>
+        <span class="menu-search-box" style="display: none;">
+            <a class="place-right">
+                <span class="input-control text" style="margin-top:8px;">
+                    <input type="text" id="searchText" placeholder="جستجو" autocomplete="off">
+                </span>
+            </a>
+            
+            <span class="app-bar-divider"></span>
+        </span>
+
+        <a href="/Education/Home" class="place-right branding university-logo" style="margin-right:3px;">
+            <img src="https://uastcdn.uast.ac.ir/CDN/images/UniversityLogo.png" class="" style="height: 49px; display: inline-block;" title="مرکز آموزش علمی - کاربردی مبارکه" alt="لوگوی دانشگاه">
+        </a>
+        <a href="/Education/Home" class="place-right branding university-title visible-lg visible-md">مرکز آموزش علمی - کاربردی مبارکه <span class="hide">Hamava version [1.0.0.21820]</span></a>
+
+    </span>
+    <div class="app-bar-pull left-menu-items" style="float:left;">
+
+            <div style="display:inline-block;" class="hidden-xs">
+                <a href="javascript:void(0);" id="ticket-button" class="app-bar-element branding" title="پشتیبانی">
+                    <span class="fa fa-question-circle font14"></span>
+                    <span>
+                        پشتیبانی
+                    </span>
+                </a>
+            </div>
+            <div style="display:inline-block;">
+                <a href="javascript:void(0);" id="notification-button" class="app-bar-element branding" title="پیام&zwnj;ها">
+                    <span class="fa fa-envelope-o font14"></span>
+                    <span class="counter unSeenMessageCount" style="font-size:9px">0</span>
+                </a>
+            </div>
+            <div style="display:inline-block;">
+                <a id="HamavaHelp" href="javascript:void(0);" class="app-bar-element branding" title="راهنما">
+                    <span class="fa fa-question not-active" style="font-size:17pt"></span>
+                </a>
+            </div>
+            <div class="dropdown" style="display:inline-block;">
+                <div class="app-bar-element branding dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="fa-user fa font14"></span>
+                    <span class="hidden-xs">هادی پاشائی (دانشجو)</span>
+                    <i class="fa fa-caret-down" aria-hidden="true" title="Toggle dropdown menu"></i>
+                </div>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a>5410323173</a></li>
+                    <li><a href="/CAS/Users/Profile" title="هادی پاشائی (5410323173)"> <span class="hidden-xs"><b>اطلاعات شخصی</b></span></a></li>
+                    
+                    <li><a href="/CAS/Account/ChangePassword">تغییر رمز عبور</a></li>
+                    <li><a href="/CAS/Users/Email">تغییر آدرس ایمیل</a></li>
+                    <li><a href="/CAS/Users/ChangeMobile">تغییر موبایل</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li>
+                        <div>
+                            <a class="btn btn-default" href="/CAS/LinkedAccounts/Add">
+                                
+                                افزودن اکانت
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div style="display:inline-block;">
+                <a href="/CAS/Account/Logout" title="خروج" class="app-bar-element branding"><span class="fa-power-off fa font14"></span></a>
+            </div>
+    </div>
+</header>
+
+<div class="start-menu no-padding ">
+    <div class="menu-container hide">
+        <div class="navy remove-bar hide">
+            <span id="trash-button" class="place-right branding app-bar-element ui-droppable">
+                <span class="fa fa-trash" style="margin-right:5px;margin-left:5px; font-size:20pt"></span>
+            </span>
+        </div>
+        <div id="full-menu" class="hide">
+            <div class="layer">
+                <div class="tile-container1 ">
+                    <div class="full-menu-container"><div class="full-menu-list"></div></div>
+                </div>
+            </div>
+        </div>
+        <div id="small-menu" class="tile-container ui-widget-header ui-sortable" style=""><div class="bg-amber tile menu-tile ui-widget-content disable-sort-item ui-sortable-handle" data-role="tile" data-url="/Education/Grading/RevisionWorkbook" title="کارنامه موقت" usermenulinkid="3fed146d-20bb-4c40-9eec-6c0554f56bd7" tabindex="0" style="opacity: 1; transform: scale(1); transition: all;"><div class="tile-content iconic"><span class="tile-type-btn hide tile-small-btn fa fa-compress" title="کوچک"></span><span class="tile-type-btn hide tile-medium-btn fa fa-square" title="متوسط"></span><span class="tile-type-btn hide tile-wide-btn fa fa-arrows-h" title="عریض"></span><span class="tile-type-btn hide tile-large-btn fa fa-expand" title="بزرگ"></span><span class="icon-tile fa fa-link "></span><span class="tile-label ">کارنامه موقت</span></div></div><div class="bg-cyan tile menu-tile ui-widget-content disable-sort-item ui-sortable-handle" data-role="tile" data-url="/Education/CourseStudyChanges/StudentRequest" title="تغییر رشته" usermenulinkid="9aed01f6-fd25-4c6b-b85f-f21800422afb" tabindex="0" style="opacity: 1; transform: scale(1); transition: all;"><div class="tile-content iconic"><span class="tile-type-btn hide tile-small-btn fa fa-compress" title="کوچک"></span><span class="tile-type-btn hide tile-medium-btn fa fa-square" title="متوسط"></span><span class="tile-type-btn hide tile-wide-btn fa fa-arrows-h" title="عریض"></span><span class="tile-type-btn hide tile-large-btn fa fa-expand" title="بزرگ"></span><span class="icon-tile fa fa-link "></span><span class="tile-label ">تغییر رشته</span></div></div><div class="bg-amber tile menu-tile ui-widget-content disable-sort-item ui-sortable-handle" data-role="tile" data-url="/Education/StudentLessons/StudentLessonRoadMapRegister" title="انتخاب واحد" usermenulinkid="c8f8c854-b6ee-41f4-a546-04567f7a03f6" tabindex="0" style="opacity: 1; transform: scale(1); transition: all;"><div class="tile-content iconic"><span class="tile-type-btn hide tile-small-btn fa fa-compress" title="کوچک"></span><span class="tile-type-btn hide tile-medium-btn fa fa-square" title="متوسط"></span><span class="tile-type-btn hide tile-wide-btn fa fa-arrows-h" title="عریض"></span><span class="tile-type-btn hide tile-large-btn fa fa-expand" title="بزرگ"></span><span class="icon-tile fa fa-link "></span><span class="tile-label ">انتخاب واحد</span></div></div><div class="bg-emerald tile menu-tile ui-widget-content disable-sort-item ui-sortable-handle" data-role="tile" data-url="/Education/UastWorkbooks" title="کارنامه" usermenulinkid="e72c615b-9573-48ce-912f-3982b9c2d888" tabindex="0" style="opacity: 1; transform: scale(1); transition: all;"><div class="tile-content iconic"><span class="tile-type-btn hide tile-small-btn fa fa-compress" title="کوچک"></span><span class="tile-type-btn hide tile-medium-btn fa fa-square" title="متوسط"></span><span class="tile-type-btn hide tile-wide-btn fa fa-arrows-h" title="عریض"></span><span class="tile-type-btn hide tile-large-btn fa fa-expand" title="بزرگ"></span><span class="icon-tile menu-icon workbook-logo"></span><span class="tile-label ">کارنامه</span></div></div><div class="bg-darkRed tile menu-tile ui-widget-content disable-sort-item ui-sortable-handle" data-role="tile" data-url="/Education/StudentLessons/StudentWeeklyProgramPrint" title="تایید انتخاب واحد و برنامه هفتگی" usermenulinkid="41f5e4be-4f46-4eae-af2d-af9244236306" tabindex="0" style="opacity: 1; transform: scale(1); transition: all;"><div class="tile-content iconic"><span class="tile-type-btn hide tile-small-btn fa fa-compress" title="کوچک"></span><span class="tile-type-btn hide tile-medium-btn fa fa-square" title="متوسط"></span><span class="tile-type-btn hide tile-wide-btn fa fa-arrows-h" title="عریض"></span><span class="tile-type-btn hide tile-large-btn fa fa-expand" title="بزرگ"></span><span class="icon-tile fa fa-link "></span><span class="tile-label ">تایید انتخاب واحد ...</span></div></div><div class="bg-indigo tile menu-tile ui-widget-content disable-sort-item ui-sortable-handle" data-role="tile" data-url="/OnlinePayment/Home/UASTStartPayDebit" title="تسویه حساب دانشجو" usermenulinkid="a15106ee-3f9b-4056-bf8f-101063e66972" tabindex="0" style="opacity: 1; transform: scale(1); transition: all;"><div class="tile-content iconic"><span class="tile-type-btn hide tile-small-btn fa fa-compress" title="کوچک"></span><span class="tile-type-btn hide tile-medium-btn fa fa-square" title="متوسط"></span><span class="tile-type-btn hide tile-wide-btn fa fa-arrows-h" title="عریض"></span><span class="tile-type-btn hide tile-large-btn fa fa-expand" title="بزرگ"></span><span class="icon-tile menu-icon onlinepayment-logo"></span><span class="tile-label ">تسویه حساب دانشجو</span></div></div><div class="bg-teal tile menu-tile ui-widget-content disable-sort-item ui-sortable-handle" data-role="tile" data-url="/Education/StudentLessonCatalogs" title="نیمرخ تحصیلی" usermenulinkid="ac631f94-9fba-447f-a830-95282fa6f51b" tabindex="0" style="opacity: 1; transform: scale(1); transition: all;"><div class="tile-content iconic"><span class="tile-type-btn hide tile-small-btn fa fa-compress" title="کوچک"></span><span class="tile-type-btn hide tile-medium-btn fa fa-square" title="متوسط"></span><span class="tile-type-btn hide tile-wide-btn fa fa-arrows-h" title="عریض"></span><span class="tile-type-btn hide tile-large-btn fa fa-expand" title="بزرگ"></span><span class="icon-tile fa fa-link "></span><span class="tile-label ">نیمرخ تحصیلی</span></div></div><div class="bg-teal tile menu-tile ui-widget-content disable-sort-item ui-sortable-handle" data-role="tile" data-url="/Financial/SMSPackages/Index" title="بسته پیامکی" usermenulinkid="6e931d6c-7fd2-437e-8a64-d278f36f327b" tabindex="0" style="opacity: 1; transform: scale(1); transition: all;"><div class="tile-content iconic"><span class="tile-type-btn hide tile-small-btn fa fa-compress" title="کوچک"></span><span class="tile-type-btn hide tile-medium-btn fa fa-square" title="متوسط"></span><span class="tile-type-btn hide tile-wide-btn fa fa-arrows-h" title="عریض"></span><span class="tile-type-btn hide tile-large-btn fa fa-expand" title="بزرگ"></span><span class="icon-tile fa fa-link "></span><span class="tile-label ">بسته پیامکی</span></div></div><div class="bg-lime tile menu-tile ui-widget-content disable-sort-item ui-sortable-handle" data-role="tile" data-url="/Education/ExamCards/StudentExamCard" title="نمایش و چاپ کارت امتحان" usermenulinkid="220dd6d5-1ecb-405e-8f71-9d9daa3df8f7" tabindex="0" style="opacity: 1; transform: scale(1); transition: all;"><div class="tile-content iconic"><span class="tile-type-btn hide tile-small-btn fa fa-compress" title="کوچک"></span><span class="tile-type-btn hide tile-medium-btn fa fa-square" title="متوسط"></span><span class="tile-type-btn hide tile-wide-btn fa fa-arrows-h" title="عریض"></span><span class="tile-type-btn hide tile-large-btn fa fa-expand" title="بزرگ"></span><span class="icon-tile fa fa-link "></span><span class="tile-label ">نمایش و چاپ کارت ا...</span></div></div><div class="bg-violet tile menu-tile ui-widget-content disable-sort-item ui-sortable-handle" data-role="tile" data-url="/Evaluation/StudentForms" title="ارزشیابی نیمسال جاری" usermenulinkid="4dc46ec2-09d9-48da-8eea-99ad155d77f2" tabindex="0" style="opacity: 1; transform: scale(1); transition: all;"><div class="tile-content iconic"><span class="tile-type-btn hide tile-small-btn fa fa-compress" title="کوچک"></span><span class="tile-type-btn hide tile-medium-btn fa fa-square" title="متوسط"></span><span class="tile-type-btn hide tile-wide-btn fa fa-arrows-h" title="عریض"></span><span class="tile-type-btn hide tile-large-btn fa fa-expand" title="بزرگ"></span><span class="icon-tile fa fa-link "></span><span class="tile-label ">ارزشیابی نیمسال جاری</span></div></div><div class="bg-blue tile menu-tile ui-widget-content disable-sort-item ui-sortable-handle" data-role="tile" data-url="/Education/GraduatingRequests/StudentRequest" title="درخواست فارغ التحصیلی" usermenulinkid="35bd6b9d-3557-4794-bc11-6c5c42b228bd" tabindex="0" style="opacity: 1; transform: scale(1); transition: all;"><div class="tile-content iconic"><span class="tile-type-btn hide tile-small-btn fa fa-compress" title="کوچک"></span><span class="tile-type-btn hide tile-medium-btn fa fa-square" title="متوسط"></span><span class="tile-type-btn hide tile-wide-btn fa fa-arrows-h" title="عریض"></span><span class="tile-type-btn hide tile-large-btn fa fa-expand" title="بزرگ"></span><span class="icon-tile fa fa-link "></span><span class="tile-label ">درخواست فارغ التحص...</span></div></div><div class="bg-indigo tile menu-tile ui-widget-content disable-sort-item ui-sortable-handle" data-role="tile" data-url="/Education/Transfers/EducationUASTTransferRequest" title="درخواست انتقالی" usermenulinkid="e3cca88f-013f-4b96-8eb3-53a117f67fde" tabindex="0" style="opacity: 1; transform: scale(1); transition: all;"><div class="tile-content iconic"><span class="tile-type-btn hide tile-small-btn fa fa-compress" title="کوچک"></span><span class="tile-type-btn hide tile-medium-btn fa fa-square" title="متوسط"></span><span class="tile-type-btn hide tile-wide-btn fa fa-arrows-h" title="عریض"></span><span class="tile-type-btn hide tile-large-btn fa fa-expand" title="بزرگ"></span><span class="icon-tile fa fa-link "></span><span class="tile-label ">درخواست انتقالی</span></div></div><div class="bg-indigo tile menu-tile ui-widget-content disable-sort-item ui-sortable-handle" data-role="tile" data-url="/Education/Cancelations/EducationUASTCancelationRequest" title="درخواست انصراف" usermenulinkid="54f9152d-c6a1-413b-887d-afbd35eaa8ed" tabindex="0" style="opacity: 1; transform: scale(1); transition: all;"><div class="tile-content iconic"><span class="tile-type-btn hide tile-small-btn fa fa-compress" title="کوچک"></span><span class="tile-type-btn hide tile-medium-btn fa fa-square" title="متوسط"></span><span class="tile-type-btn hide tile-wide-btn fa fa-arrows-h" title="عریض"></span><span class="tile-type-btn hide tile-large-btn fa fa-expand" title="بزرگ"></span><span class="icon-tile fa fa-link "></span><span class="tile-label ">درخواست انصراف</span></div></div><div class="bg-magenta tile menu-tile ui-widget-content disable-sort-item ui-sortable-handle" data-role="tile" data-url="/Education/Guests/EducationUASTGuestRequest" title="درخواست مهمانی" usermenulinkid="ce95f410-3c95-40b3-83d6-76abce4cd2ed" tabindex="0" style="opacity: 1; transform: scale(1); transition: all;"><div class="tile-content iconic"><span class="tile-type-btn hide tile-small-btn fa fa-compress" title="کوچک"></span><span class="tile-type-btn hide tile-medium-btn fa fa-square" title="متوسط"></span><span class="tile-type-btn hide tile-wide-btn fa fa-arrows-h" title="عریض"></span><span class="tile-type-btn hide tile-large-btn fa fa-expand" title="بزرگ"></span><span class="icon-tile fa fa-link "></span><span class="tile-label ">درخواست مهمانی</span></div></div><div class="bg-yellow tile menu-tile ui-widget-content disable-sort-item ui-sortable-handle" data-role="tile" data-url="/Financial/Reports/UASTStudentTotalFinancials/Student" title="کارنامه مالی دانشجو" usermenulinkid="6fa3b527-90fd-4bf2-bddd-5393ee0f0cf3" tabindex="0" style="opacity: 1; transform: scale(1); transition: all;"><div class="tile-content iconic"><span class="tile-type-btn hide tile-small-btn fa fa-compress" title="کوچک"></span><span class="tile-type-btn hide tile-medium-btn fa fa-square" title="متوسط"></span><span class="tile-type-btn hide tile-wide-btn fa fa-arrows-h" title="عریض"></span><span class="tile-type-btn hide tile-large-btn fa fa-expand" title="بزرگ"></span><span class="icon-tile fa fa-link "></span><span class="tile-label ">کارنامه مالی دانشجو</span></div></div><div class="bg-darkCyan tile menu-tile ui-widget-content disable-sort-item ui-sortable-handle" data-role="tile" data-url="/Education/TransferWithChangeCourseStudy/StudentRequest" title="انتقال توام با تغییر رشته" usermenulinkid="25a63796-6775-434a-a879-1a16e3f83b8b" tabindex="0" style="opacity: 1; transform: scale(1); transition: all;"><div class="tile-content iconic"><span class="tile-type-btn hide tile-small-btn fa fa-compress" title="کوچک"></span><span class="tile-type-btn hide tile-medium-btn fa fa-square" title="متوسط"></span><span class="tile-type-btn hide tile-wide-btn fa fa-arrows-h" title="عریض"></span><span class="tile-type-btn hide tile-large-btn fa fa-expand" title="بزرگ"></span><span class="icon-tile fa fa-link "></span><span class="tile-label ">انتقال توام با تغی...</span></div></div><div class="bg-orange tile menu-tile ui-widget-content disable-sort-item ui-sortable-handle" data-role="tile" data-url="/cas/Account/ChangePassword" title="تغییر کلمه عبور" usermenulinkid="9f2c08fb-0338-4832-9096-324ba65b9480" tabindex="0" style="opacity: 1; transform: scale(1); transition: all;"><div class="tile-content iconic"><span class="tile-type-btn hide tile-small-btn fa fa-compress" title="کوچک"></span><span class="tile-type-btn hide tile-medium-btn fa fa-square" title="متوسط"></span><span class="tile-type-btn hide tile-wide-btn fa fa-arrows-h" title="عریض"></span><span class="tile-type-btn hide tile-large-btn fa fa-expand" title="بزرگ"></span><span class="icon-tile menu-icon changepassword-logo"></span><span class="tile-label ">تغییر کلمه عبور</span></div></div><div class="bg-darkMagenta tile menu-tile ui-widget-content disable-sort-item ui-sortable-handle" data-role="tile" data-url="/cas/Users/Profile" title="اطلاعات شخصی" usermenulinkid="5bdf9b19-04c0-4aee-8c26-81879b7c2715" tabindex="0" style="opacity: 1; transform: scale(1); transition: all;"><div class="tile-content iconic"><span class="tile-type-btn hide tile-small-btn fa fa-compress" title="کوچک"></span><span class="tile-type-btn hide tile-medium-btn fa fa-square" title="متوسط"></span><span class="tile-type-btn hide tile-wide-btn fa fa-arrows-h" title="عریض"></span><span class="tile-type-btn hide tile-large-btn fa fa-expand" title="بزرگ"></span><span class="icon-tile fa fa-link "></span><span class="tile-label ">اطلاعات شخصی</span></div></div><div class="bg-crimson tile menu-tile ui-widget-content disable-sort-item ui-sortable-handle" data-role="tile" data-url="/Education/Home" title="میزکار" usermenulinkid="7b6c8160-a357-4a6d-9f50-4c4c2a860e4f" tabindex="0" style="opacity: 1; transform: scale(1); transition: all;"><div class="tile-content iconic"><span class="tile-type-btn hide tile-small-btn fa fa-compress" title="کوچک"></span><span class="tile-type-btn hide tile-medium-btn fa fa-square" title="متوسط"></span><span class="tile-type-btn hide tile-wide-btn fa fa-arrows-h" title="عریض"></span><span class="tile-type-btn hide tile-large-btn fa fa-expand" title="بزرگ"></span><span class="icon-tile fa fa-link "></span><span class="tile-label ">میزکار</span></div></div></div>
+    </div>
+</div>
+<div class="arrow-up" style="display:none" id="notification-panel">
+</div>
+<div class="arrow-up" style="display:none" id="ticket-panel">
+    <br>
+    کاربر گرامی، درصورتیکه سئوال شما در قسمت سئوالات متداول پاسخ داده نشده است، می&zwnj;توانید موضوع را از مرکز آموزشی و متعاقبا از واحد استانی مربوط پیگیری بفرمایید.
+    <br>
+    <br>
+    <a href="https://ict.uast.ac.ir/fa/grid/354" class="badge badge-warning" title="سوالات متداول" target="”_blank”"><b>سوالات متداول</b></a>
+</div>
+<div style="display:none" id="linkAccount-panel">
+    <div class="panel panel-default" style="position: relative;" id="ComplexUniversityRegisteration">
+        <div class="panel-heading"><span>لطفا رمز عبور حساب کاربری متصل را وارد کنید</span></div>
+        <div class="panel-body">
+            <div class="row">
+<form action="/CAS/Account/ValidateLinkedAccountUser" id="validate-form" method="post">                    <div class="form-group row">
+                        <input id="linkAccountUserId" name="linkAccountUserId" type="hidden" value="">
+                        <label>رمز عبور</label>
+                        <input id="password" name="password" type="password">
+                    </div>
+                    <div class="form-group row">
+                        <button type="button" class="btn btn-info" id="cancel-linkaccount">انصراف</button> <button type="button" class="btn btn-info" id="submit-linkaccount">ورود</button>
+                    </div>
+</form>            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+	var DisableHeavyProcess = "False";
+	var disableIt = false;
+
+	if (DisableHeavyProcess == "True")
+		disableIt = true;
+	else
+		disableIt = false;
+
+	var orginalUserMenuLinks = [{"UserMenuLinkId":"3fed146d-20bb-4c40-9eec-6c0554f56bd7","MenuLinkId":"4e5ae015-ee5d-4a98-b291-12fb92a21b5d","IsPinned":true,"Priority":1,"TileType":1,"NumberOfVisits":0,"UserId":"95fdfd07-6df2-443d-b16f-5f53f3422619","MenuLink":{"MenuLinkId":"4e5ae015-ee5d-4a98-b291-12fb92a21b5d","MenuCategoryId":"3d372d32-a421-4398-b1c2-9b1e01c3cd81","RoleName":null,"Title":"کارنامه موقت","Description":"","URL":"/Grading/RevisionWorkbook","CSSClass":"","ColorClass":"bg-amber","IconURL":"","IsActive":true,"HasStudentAccess":false,"HasProfessorAccess":false,"HasStaffAccess":false,"MenuCategory":{"MenuCategoryId":"3d372d32-a421-4398-b1c2-9b1e01c3cd81","Title":"EducationStudnetReports","ApplicationId":2,"Application":{"ApplicationId":2,"Title":"Education","Description":"آموزش","Path":"/Education","Icon":null,"IconUploadDate":null,"IsActive":false,"Roles":[],"Users":[],"EducationPayments":[],"MenuCategories":[],"UASTEducationPayments":[]},"MenuLinks":[]},"UserMenuLinks":[]},"User":null},{"UserMenuLinkId":"9aed01f6-fd25-4c6b-b85f-f21800422afb","MenuLinkId":"0788f49e-4d5e-4574-b375-18748d953e47","IsPinned":true,"Priority":2,"TileType":1,"NumberOfVisits":0,"UserId":"95fdfd07-6df2-443d-b16f-5f53f3422619","MenuLink":{"MenuLinkId":"0788f49e-4d5e-4574-b375-18748d953e47","MenuCategoryId":"637b0fa7-7859-4cab-a50e-70df0b4f2e50","RoleName":null,"Title":"تغییر رشته","Description":"","URL":"/CourseStudyChanges/StudentRequest","CSSClass":"","ColorClass":"bg-cyan","IconURL":"","IsActive":true,"HasStudentAccess":false,"HasProfessorAccess":false,"HasStaffAccess":false,"MenuCategory":{"MenuCategoryId":"637b0fa7-7859-4cab-a50e-70df0b4f2e50","Title":"EducationEducationalTerms","ApplicationId":2,"Application":{"ApplicationId":2,"Title":"Education","Description":"آموزش","Path":"/Education","Icon":null,"IconUploadDate":null,"IsActive":false,"Roles":[],"Users":[],"EducationPayments":[],"MenuCategories":[],"UASTEducationPayments":[]},"MenuLinks":[]},"UserMenuLinks":[]},"User":null},{"UserMenuLinkId":"c8f8c854-b6ee-41f4-a546-04567f7a03f6","MenuLinkId":"d04a1299-7089-4d5e-b987-2e1c25d4ced5","IsPinned":true,"Priority":3,"TileType":1,"NumberOfVisits":0,"UserId":"95fdfd07-6df2-443d-b16f-5f53f3422619","MenuLink":{"MenuLinkId":"d04a1299-7089-4d5e-b987-2e1c25d4ced5","MenuCategoryId":"637b0fa7-7859-4cab-a50e-70df0b4f2e50","RoleName":null,"Title":"انتخاب واحد","Description":"","URL":"/StudentLessons/StudentLessonRoadMapRegister","CSSClass":"","ColorClass":"bg-amber","IconURL":"","IsActive":true,"HasStudentAccess":false,"HasProfessorAccess":false,"HasStaffAccess":false,"MenuCategory":{"MenuCategoryId":"637b0fa7-7859-4cab-a50e-70df0b4f2e50","Title":"EducationEducationalTerms","ApplicationId":2,"Application":{"ApplicationId":2,"Title":"Education","Description":"آموزش","Path":"/Education","Icon":null,"IconUploadDate":null,"IsActive":false,"Roles":[],"Users":[],"EducationPayments":[],"MenuCategories":[],"UASTEducationPayments":[]},"MenuLinks":[]},"UserMenuLinks":[]},"User":null},{"UserMenuLinkId":"e72c615b-9573-48ce-912f-3982b9c2d888","MenuLinkId":"68243790-4204-4bb3-8d2f-3ca5c3d4ceea","IsPinned":true,"Priority":4,"TileType":1,"NumberOfVisits":0,"UserId":"95fdfd07-6df2-443d-b16f-5f53f3422619","MenuLink":{"MenuLinkId":"68243790-4204-4bb3-8d2f-3ca5c3d4ceea","MenuCategoryId":"3d372d32-a421-4398-b1c2-9b1e01c3cd81","RoleName":null,"Title":"کارنامه","Description":"","URL":"/UastWorkbooks","CSSClass":"","ColorClass":"bg-emerald","IconURL":"menu-icon workbook-logo","IsActive":true,"HasStudentAccess":false,"HasProfessorAccess":false,"HasStaffAccess":false,"MenuCategory":{"MenuCategoryId":"3d372d32-a421-4398-b1c2-9b1e01c3cd81","Title":"EducationStudnetReports","ApplicationId":2,"Application":{"ApplicationId":2,"Title":"Education","Description":"آموزش","Path":"/Education","Icon":null,"IconUploadDate":null,"IsActive":false,"Roles":[],"Users":[],"EducationPayments":[],"MenuCategories":[],"UASTEducationPayments":[]},"MenuLinks":[]},"UserMenuLinks":[]},"User":null},{"UserMenuLinkId":"41f5e4be-4f46-4eae-af2d-af9244236306","MenuLinkId":"d1ffb8e5-51a0-4445-9529-422badb4e7a3","IsPinned":true,"Priority":5,"TileType":1,"NumberOfVisits":0,"UserId":"95fdfd07-6df2-443d-b16f-5f53f3422619","MenuLink":{"MenuLinkId":"d1ffb8e5-51a0-4445-9529-422badb4e7a3","MenuCategoryId":"637b0fa7-7859-4cab-a50e-70df0b4f2e50","RoleName":null,"Title":"تایید انتخاب واحد و برنامه هفتگی","Description":"","URL":"/StudentLessons/StudentWeeklyProgramPrint","CSSClass":"","ColorClass":"bg-darkRed","IconURL":"","IsActive":true,"HasStudentAccess":false,"HasProfessorAccess":false,"HasStaffAccess":false,"MenuCategory":{"MenuCategoryId":"637b0fa7-7859-4cab-a50e-70df0b4f2e50","Title":"EducationEducationalTerms","ApplicationId":2,"Application":{"ApplicationId":2,"Title":"Education","Description":"آموزش","Path":"/Education","Icon":null,"IconUploadDate":null,"IsActive":false,"Roles":[],"Users":[],"EducationPayments":[],"MenuCategories":[],"UASTEducationPayments":[]},"MenuLinks":[]},"UserMenuLinks":[]},"User":null},{"UserMenuLinkId":"a15106ee-3f9b-4056-bf8f-101063e66972","MenuLinkId":"2c3e015e-c7a2-4701-bde9-61ac22933bf1","IsPinned":true,"Priority":6,"TileType":1,"NumberOfVisits":0,"UserId":"95fdfd07-6df2-443d-b16f-5f53f3422619","MenuLink":{"MenuLinkId":"2c3e015e-c7a2-4701-bde9-61ac22933bf1","MenuCategoryId":"117d2d77-23d4-4cc2-a070-fd55ad38e693","RoleName":null,"Title":"تسویه حساب دانشجو","Description":"","URL":"/Home/UASTStartPayDebit","CSSClass":"","ColorClass":"bg-indigo","IconURL":"menu-icon onlinepayment-logo","IsActive":true,"HasStudentAccess":false,"HasProfessorAccess":false,"HasStaffAccess":false,"MenuCategory":{"MenuCategoryId":"117d2d77-23d4-4cc2-a070-fd55ad38e693","Title":"OnlinePayment","ApplicationId":10,"Application":{"ApplicationId":10,"Title":"OnlinePayment","Description":"پرداخت آنلاین","Path":"/OnlinePayment","Icon":null,"IconUploadDate":null,"IsActive":false,"Roles":[],"Users":[],"EducationPayments":[],"MenuCategories":[],"UASTEducationPayments":[]},"MenuLinks":[]},"UserMenuLinks":[]},"User":null},{"UserMenuLinkId":"ac631f94-9fba-447f-a830-95282fa6f51b","MenuLinkId":"4010277f-a11e-4205-a999-6f677ecb6cf0","IsPinned":true,"Priority":7,"TileType":1,"NumberOfVisits":0,"UserId":"95fdfd07-6df2-443d-b16f-5f53f3422619","MenuLink":{"MenuLinkId":"4010277f-a11e-4205-a999-6f677ecb6cf0","MenuCategoryId":"637b0fa7-7859-4cab-a50e-70df0b4f2e50","RoleName":null,"Title":"نیمرخ تحصیلی","Description":"","URL":"/StudentLessonCatalogs","CSSClass":"","ColorClass":"bg-teal","IconURL":"","IsActive":true,"HasStudentAccess":false,"HasProfessorAccess":false,"HasStaffAccess":false,"MenuCategory":{"MenuCategoryId":"637b0fa7-7859-4cab-a50e-70df0b4f2e50","Title":"EducationEducationalTerms","ApplicationId":2,"Application":{"ApplicationId":2,"Title":"Education","Description":"آموزش","Path":"/Education","Icon":null,"IconUploadDate":null,"IsActive":false,"Roles":[],"Users":[],"EducationPayments":[],"MenuCategories":[],"UASTEducationPayments":[]},"MenuLinks":[]},"UserMenuLinks":[]},"User":null},{"UserMenuLinkId":"6e931d6c-7fd2-437e-8a64-d278f36f327b","MenuLinkId":"5800348b-88da-4900-8b42-704beb7b4395","IsPinned":true,"Priority":8,"TileType":1,"NumberOfVisits":0,"UserId":"95fdfd07-6df2-443d-b16f-5f53f3422619","MenuLink":{"MenuLinkId":"5800348b-88da-4900-8b42-704beb7b4395","MenuCategoryId":"d70abd75-af6c-456a-a51f-2b76cdeefdac","RoleName":null,"Title":"بسته پیامکی","Description":"","URL":"/SMSPackages/Index","CSSClass":"","ColorClass":"bg-teal","IconURL":"","IsActive":true,"HasStudentAccess":false,"HasProfessorAccess":false,"HasStaffAccess":false,"MenuCategory":{"MenuCategoryId":"d70abd75-af6c-456a-a51f-2b76cdeefdac","Title":"FinancialReports","ApplicationId":3,"Application":{"ApplicationId":3,"Title":"Financial","Description":"مالی","Path":"/Financial","Icon":null,"IconUploadDate":null,"IsActive":false,"Roles":[],"Users":[],"EducationPayments":[],"MenuCategories":[],"UASTEducationPayments":[]},"MenuLinks":[]},"UserMenuLinks":[]},"User":null},{"UserMenuLinkId":"220dd6d5-1ecb-405e-8f71-9d9daa3df8f7","MenuLinkId":"8b20c83f-3044-4f52-9bd5-83e80cc89ca8","IsPinned":true,"Priority":9,"TileType":1,"NumberOfVisits":0,"UserId":"95fdfd07-6df2-443d-b16f-5f53f3422619","MenuLink":{"MenuLinkId":"8b20c83f-3044-4f52-9bd5-83e80cc89ca8","MenuCategoryId":"3d372d32-a421-4398-b1c2-9b1e01c3cd81","RoleName":null,"Title":"نمایش و چاپ کارت امتحان","Description":"","URL":"/ExamCards/StudentExamCard","CSSClass":"","ColorClass":"bg-lime","IconURL":"","IsActive":true,"HasStudentAccess":false,"HasProfessorAccess":false,"HasStaffAccess":false,"MenuCategory":{"MenuCategoryId":"3d372d32-a421-4398-b1c2-9b1e01c3cd81","Title":"EducationStudnetReports","ApplicationId":2,"Application":{"ApplicationId":2,"Title":"Education","Description":"آموزش","Path":"/Education","Icon":null,"IconUploadDate":null,"IsActive":false,"Roles":[],"Users":[],"EducationPayments":[],"MenuCategories":[],"UASTEducationPayments":[]},"MenuLinks":[]},"UserMenuLinks":[]},"User":null},{"UserMenuLinkId":"4dc46ec2-09d9-48da-8eea-99ad155d77f2","MenuLinkId":"1ba50776-1c6b-44dd-83b5-90a3e41824bd","IsPinned":true,"Priority":10,"TileType":1,"NumberOfVisits":0,"UserId":"95fdfd07-6df2-443d-b16f-5f53f3422619","MenuLink":{"MenuLinkId":"1ba50776-1c6b-44dd-83b5-90a3e41824bd","MenuCategoryId":"89df5319-6e3c-442f-b115-9fa5a1caaa07","RoleName":null,"Title":"ارزشیابی نیمسال جاری","Description":"","URL":"/StudentForms","CSSClass":"","ColorClass":"bg-violet","IconURL":"","IsActive":true,"HasStudentAccess":false,"HasProfessorAccess":false,"HasStaffAccess":false,"MenuCategory":{"MenuCategoryId":"89df5319-6e3c-442f-b115-9fa5a1caaa07","Title":"EvaluationStudents","ApplicationId":5,"Application":{"ApplicationId":5,"Title":"Evaluation","Description":"ارزشیابی","Path":"/Evaluation","Icon":null,"IconUploadDate":null,"IsActive":false,"Roles":[],"Users":[],"EducationPayments":[],"MenuCategories":[],"UASTEducationPayments":[]},"MenuLinks":[]},"UserMenuLinks":[]},"User":null},{"UserMenuLinkId":"35bd6b9d-3557-4794-bc11-6c5c42b228bd","MenuLinkId":"cd31300d-ed22-4733-afd4-9de887fd564a","IsPinned":true,"Priority":11,"TileType":1,"NumberOfVisits":0,"UserId":"95fdfd07-6df2-443d-b16f-5f53f3422619","MenuLink":{"MenuLinkId":"cd31300d-ed22-4733-afd4-9de887fd564a","MenuCategoryId":"637b0fa7-7859-4cab-a50e-70df0b4f2e50","RoleName":null,"Title":"درخواست فارغ التحصیلی","Description":"","URL":"/GraduatingRequests/StudentRequest","CSSClass":"","ColorClass":"bg-blue","IconURL":"","IsActive":true,"HasStudentAccess":false,"HasProfessorAccess":false,"HasStaffAccess":false,"MenuCategory":{"MenuCategoryId":"637b0fa7-7859-4cab-a50e-70df0b4f2e50","Title":"EducationEducationalTerms","ApplicationId":2,"Application":{"ApplicationId":2,"Title":"Education","Description":"آموزش","Path":"/Education","Icon":null,"IconUploadDate":null,"IsActive":false,"Roles":[],"Users":[],"EducationPayments":[],"MenuCategories":[],"UASTEducationPayments":[]},"MenuLinks":[]},"UserMenuLinks":[]},"User":null},{"UserMenuLinkId":"e3cca88f-013f-4b96-8eb3-53a117f67fde","MenuLinkId":"60dd6d47-f425-4600-b979-a8746ccf4234","IsPinned":true,"Priority":12,"TileType":1,"NumberOfVisits":0,"UserId":"95fdfd07-6df2-443d-b16f-5f53f3422619","MenuLink":{"MenuLinkId":"60dd6d47-f425-4600-b979-a8746ccf4234","MenuCategoryId":"637b0fa7-7859-4cab-a50e-70df0b4f2e50","RoleName":null,"Title":"درخواست انتقالی","Description":"","URL":"/Transfers/EducationUASTTransferRequest","CSSClass":"","ColorClass":"bg-indigo","IconURL":"","IsActive":true,"HasStudentAccess":false,"HasProfessorAccess":false,"HasStaffAccess":false,"MenuCategory":{"MenuCategoryId":"637b0fa7-7859-4cab-a50e-70df0b4f2e50","Title":"EducationEducationalTerms","ApplicationId":2,"Application":{"ApplicationId":2,"Title":"Education","Description":"آموزش","Path":"/Education","Icon":null,"IconUploadDate":null,"IsActive":false,"Roles":[],"Users":[],"EducationPayments":[],"MenuCategories":[],"UASTEducationPayments":[]},"MenuLinks":[]},"UserMenuLinks":[]},"User":null},{"UserMenuLinkId":"54f9152d-c6a1-413b-887d-afbd35eaa8ed","MenuLinkId":"ffdea80f-5365-4854-8e6f-b0fbaf74249a","IsPinned":true,"Priority":13,"TileType":1,"NumberOfVisits":0,"UserId":"95fdfd07-6df2-443d-b16f-5f53f3422619","MenuLink":{"MenuLinkId":"ffdea80f-5365-4854-8e6f-b0fbaf74249a","MenuCategoryId":"637b0fa7-7859-4cab-a50e-70df0b4f2e50","RoleName":null,"Title":"درخواست انصراف","Description":"","URL":"/Cancelations/EducationUASTCancelationRequest","CSSClass":"","ColorClass":"bg-indigo","IconURL":"","IsActive":true,"HasStudentAccess":false,"HasProfessorAccess":false,"HasStaffAccess":false,"MenuCategory":{"MenuCategoryId":"637b0fa7-7859-4cab-a50e-70df0b4f2e50","Title":"EducationEducationalTerms","ApplicationId":2,"Application":{"ApplicationId":2,"Title":"Education","Description":"آموزش","Path":"/Education","Icon":null,"IconUploadDate":null,"IsActive":false,"Roles":[],"Users":[],"EducationPayments":[],"MenuCategories":[],"UASTEducationPayments":[]},"MenuLinks":[]},"UserMenuLinks":[]},"User":null},{"UserMenuLinkId":"ce95f410-3c95-40b3-83d6-76abce4cd2ed","MenuLinkId":"f15ae58a-c26f-4566-86a1-bf8bd8eba9af","IsPinned":true,"Priority":14,"TileType":1,"NumberOfVisits":0,"UserId":"95fdfd07-6df2-443d-b16f-5f53f3422619","MenuLink":{"MenuLinkId":"f15ae58a-c26f-4566-86a1-bf8bd8eba9af","MenuCategoryId":"637b0fa7-7859-4cab-a50e-70df0b4f2e50","RoleName":null,"Title":"درخواست مهمانی","Description":"","URL":"/Guests/EducationUASTGuestRequest","CSSClass":"","ColorClass":"bg-magenta","IconURL":"","IsActive":true,"HasStudentAccess":false,"HasProfessorAccess":false,"HasStaffAccess":false,"MenuCategory":{"MenuCategoryId":"637b0fa7-7859-4cab-a50e-70df0b4f2e50","Title":"EducationEducationalTerms","ApplicationId":2,"Application":{"ApplicationId":2,"Title":"Education","Description":"آموزش","Path":"/Education","Icon":null,"IconUploadDate":null,"IsActive":false,"Roles":[],"Users":[],"EducationPayments":[],"MenuCategories":[],"UASTEducationPayments":[]},"MenuLinks":[]},"UserMenuLinks":[]},"User":null},{"UserMenuLinkId":"6fa3b527-90fd-4bf2-bddd-5393ee0f0cf3","MenuLinkId":"c5139979-3e2e-49bc-996d-d5c0bfb23ce6","IsPinned":true,"Priority":15,"TileType":1,"NumberOfVisits":0,"UserId":"95fdfd07-6df2-443d-b16f-5f53f3422619","MenuLink":{"MenuLinkId":"c5139979-3e2e-49bc-996d-d5c0bfb23ce6","MenuCategoryId":"d70abd75-af6c-456a-a51f-2b76cdeefdac","RoleName":null,"Title":"کارنامه مالی دانشجو","Description":"","URL":"/Reports/UASTStudentTotalFinancials/Student","CSSClass":"","ColorClass":"bg-yellow","IconURL":"","IsActive":true,"HasStudentAccess":false,"HasProfessorAccess":false,"HasStaffAccess":false,"MenuCategory":{"MenuCategoryId":"d70abd75-af6c-456a-a51f-2b76cdeefdac","Title":"FinancialReports","ApplicationId":3,"Application":{"ApplicationId":3,"Title":"Financial","Description":"مالی","Path":"/Financial","Icon":null,"IconUploadDate":null,"IsActive":false,"Roles":[],"Users":[],"EducationPayments":[],"MenuCategories":[],"UASTEducationPayments":[]},"MenuLinks":[]},"UserMenuLinks":[]},"User":null},{"UserMenuLinkId":"25a63796-6775-434a-a879-1a16e3f83b8b","MenuLinkId":"961e8b21-6dcf-4092-ba87-da283902522a","IsPinned":true,"Priority":16,"TileType":1,"NumberOfVisits":0,"UserId":"95fdfd07-6df2-443d-b16f-5f53f3422619","MenuLink":{"MenuLinkId":"961e8b21-6dcf-4092-ba87-da283902522a","MenuCategoryId":"637b0fa7-7859-4cab-a50e-70df0b4f2e50","RoleName":null,"Title":"انتقال توام با تغییر رشته","Description":"","URL":"/TransferWithChangeCourseStudy/StudentRequest","CSSClass":"","ColorClass":"bg-darkCyan","IconURL":"","IsActive":true,"HasStudentAccess":false,"HasProfessorAccess":false,"HasStaffAccess":false,"MenuCategory":{"MenuCategoryId":"637b0fa7-7859-4cab-a50e-70df0b4f2e50","Title":"EducationEducationalTerms","ApplicationId":2,"Application":{"ApplicationId":2,"Title":"Education","Description":"آموزش","Path":"/Education","Icon":null,"IconUploadDate":null,"IsActive":false,"Roles":[],"Users":[],"EducationPayments":[],"MenuCategories":[],"UASTEducationPayments":[]},"MenuLinks":[]},"UserMenuLinks":[]},"User":null},{"UserMenuLinkId":"9f2c08fb-0338-4832-9096-324ba65b9480","MenuLinkId":"1ad375e4-ade8-475c-bd26-15cf15f30ce2","IsPinned":true,"Priority":17,"TileType":1,"NumberOfVisits":0,"UserId":"95fdfd07-6df2-443d-b16f-5f53f3422619","MenuLink":{"MenuLinkId":"1ad375e4-ade8-475c-bd26-15cf15f30ce2","MenuCategoryId":"8748a2df-7873-4eb3-b134-6304995940d2","RoleName":null,"Title":"تغییر کلمه عبور","Description":"","URL":"/Account/ChangePassword","CSSClass":"","ColorClass":"bg-orange","IconURL":"menu-icon changepassword-logo","IsActive":true,"HasStudentAccess":false,"HasProfessorAccess":false,"HasStaffAccess":false,"MenuCategory":{"MenuCategoryId":"8748a2df-7873-4eb3-b134-6304995940d2","Title":"CASPersonalInformation","ApplicationId":1,"Application":{"ApplicationId":1,"Title":"Cas","Description":"ورود یکپارچه","Path":"/cas","Icon":null,"IconUploadDate":null,"IsActive":false,"Roles":[],"Users":[],"EducationPayments":[],"MenuCategories":[],"UASTEducationPayments":[]},"MenuLinks":[]},"UserMenuLinks":[]},"User":null},{"UserMenuLinkId":"5bdf9b19-04c0-4aee-8c26-81879b7c2715","MenuLinkId":"5f81d8f4-cf15-4359-aab1-3b5bee3e4b13","IsPinned":true,"Priority":18,"TileType":1,"NumberOfVisits":0,"UserId":"95fdfd07-6df2-443d-b16f-5f53f3422619","MenuLink":{"MenuLinkId":"5f81d8f4-cf15-4359-aab1-3b5bee3e4b13","MenuCategoryId":"8748a2df-7873-4eb3-b134-6304995940d2","RoleName":null,"Title":"اطلاعات شخصی","Description":"","URL":"/Users/Profile","CSSClass":"","ColorClass":"bg-darkMagenta","IconURL":"","IsActive":true,"HasStudentAccess":false,"HasProfessorAccess":false,"HasStaffAccess":false,"MenuCategory":{"MenuCategoryId":"8748a2df-7873-4eb3-b134-6304995940d2","Title":"CASPersonalInformation","ApplicationId":1,"Application":{"ApplicationId":1,"Title":"Cas","Description":"ورود یکپارچه","Path":"/cas","Icon":null,"IconUploadDate":null,"IsActive":false,"Roles":[],"Users":[],"EducationPayments":[],"MenuCategories":[],"UASTEducationPayments":[]},"MenuLinks":[]},"UserMenuLinks":[]},"User":null},{"UserMenuLinkId":"7b6c8160-a357-4a6d-9f50-4c4c2a860e4f","MenuLinkId":"a679f9bf-d77e-442c-a558-bcb9b093e3fb","IsPinned":true,"Priority":19,"TileType":1,"NumberOfVisits":0,"UserId":"95fdfd07-6df2-443d-b16f-5f53f3422619","MenuLink":{"MenuLinkId":"a679f9bf-d77e-442c-a558-bcb9b093e3fb","MenuCategoryId":"36300922-3bf9-48a9-8f05-4d6f5f0d731d","RoleName":null,"Title":"میزکار","Description":"","URL":"/Home","CSSClass":"","ColorClass":"bg-crimson","IconURL":"","IsActive":true,"HasStudentAccess":false,"HasProfessorAccess":false,"HasStaffAccess":false,"MenuCategory":{"MenuCategoryId":"36300922-3bf9-48a9-8f05-4d6f5f0d731d","Title":"EducationProfessors","ApplicationId":2,"Application":{"ApplicationId":2,"Title":"Education","Description":"آموزش","Path":"/Education","Icon":null,"IconUploadDate":null,"IsActive":false,"Roles":[],"Users":[],"EducationPayments":[],"MenuCategories":[],"UASTEducationPayments":[]},"MenuLinks":[]},"UserMenuLinks":[]},"User":null}];
+	var currentUserId = "95fdfd07-6df2-443d-b16f-5f53f3422619";
+	var cdnPrefix="https://uastcdn.uast.ac.ir";
+	var canUserEditMenu='False'=="True";
+	//menu.js
+	var _0x6383=["\x63\x6C\x6F\x73\x65","\u0636","\u0635","\u062B","\u0642","\u0641","\u063A","\u0639","\u0647","\u062E","\u062D","\u062C","\u0686","\u0634","\u0633","\u06CC","\u0628","\u0644","\u0627","\u062A","\u0646","\u0645","\u06A9","\u06AF","\u0638","\u0637","\u0632","\u0631","\u0630","\u062F","\u067E","\u0648","\u061F","\x71","\x77","\x65","\x72","\x74","\x79","\x75","\x69","\x6F","\x70","\x5B","\x5D","\x61","\x73","\x64","\x66","\x67","\x68","\x6A","\x6B","\x6C","\x3B","\x27","\x7A","\x78","\x63","\x76","\x62","\x6E","\x6D","\x2C","\x3F","","\x6C\x65\x6E\x67\x74\x68","\x69\x6E\x64\x65\x78\x4F\x66","\x63\x6C\x69\x65\x6E\x74\x48\x65\x69\x67\x68\x74","\x64\x6F\x63\x75\x6D\x65\x6E\x74\x45\x6C\x65\x6D\x65\x6E\x74","\x63\x6C\x69\x65\x6E\x74\x57\x69\x64\x74\x68","\x77\x68\x69\x63\x68","\x31\x37","\x6B\x65\x79\x64\x6F\x77\x6E","\x6B\x65\x79\x75\x70","\x2E\x6D\x65\x6E\x75\x2D\x63\x6F\x6E\x74\x61\x69\x6E\x65\x72","\x68\x69\x64\x65","\x61\x64\x64\x43\x6C\x61\x73\x73","\x2E\x63\x6F\x6E\x74\x61\x69\x6E\x65\x72","\x72\x65\x6D\x6F\x76\x65\x43\x6C\x61\x73\x73","\x66\x61\x64\x65\x4F\x75\x74","\x2E\x6D\x65\x6E\x75\x2D\x73\x65\x61\x72\x63\x68\x2D\x62\x6F\x78","\x2E\x75\x6E\x69\x76\x65\x72\x73\x69\x74\x79\x2D\x6C\x6F\x67\x6F","\x2E\x6C\x65\x66\x74\x2D\x6D\x65\x6E\x75\x2D\x69\x74\x65\x6D\x73","\x68\x65\x61\x64\x65\x72\x2E\x61\x70\x70\x2D\x62\x61\x72","\x2E\x6E\x61\x76\x79\x2E\x72\x65\x6D\x6F\x76\x65\x2D\x62\x61\x72","\x66\x75\x6C\x6C\x4D\x65\x6E\x75","\x73\x74\x61\x72\x74","\x23\x66\x75\x6C\x6C\x2D\x6D\x65\x6E\x75","\x23\x73\x6D\x61\x6C\x6C\x2D\x6D\x65\x6E\x75","\x23\x63\x68\x61\x6E\x67\x65\x2D\x74\x69\x6C\x65\x2D\x62\x75\x74\x74\x6F\x6E","\x66\x61\x64\x65\x49\x6E","\x73\x68\x6F\x77","\x66\x6F\x63\x75\x73","\x23\x73\x65\x61\x72\x63\x68\x54\x65\x78\x74","\x73\x65\x61\x72\x63\x68","\x76\x61\x6C","\x54\x69\x74\x6C\x65","\x66\x69\x6C\x74\x65\x72","\x75\x73\x65\x72\x4D\x65\x6E\x75\x4C\x69\x6E\x6B\x73","\x66\x75\x6E\x63\x74\x69\x6F\x6E","\x64\x6F\x6E\x65","\x2F\x43\x41\x53\x2F\x48\x6F\x6D\x65\x2F\x47\x65\x74\x55\x73\x65\x72\x4D\x65\x6E\x75\x4C\x69\x6E\x6B\x73","\x67\x65\x74","\x55\x73\x65\x72\x49\x64\x5F","\x67\x65\x74\x49\x74\x65\x6D","\x70\x61\x72\x73\x65","\x6D\x65\x6E\x75\x4C\x69\x6E\x6B\x73","\x6D\x65\x6E\x75\x43\x61\x74\x65\x67\x6F\x72\x79\x49\x64\x73","\x73\x74\x72\x69\x6E\x67\x69\x66\x79","\x73\x65\x74\x49\x74\x65\x6D","\x2F\x43\x41\x53\x2F\x48\x6F\x6D\x65\x2F\x47\x65\x74\x41\x6C\x6C\x4D\x65\x6E\x75\x4C\x69\x6E\x6B\x73","\x75\x6E\x64\x65\x66\x69\x6E\x65\x64","\x2F\x43\x41\x53\x2F\x41\x63\x63\x6F\x75\x6E\x74\x2F\x4C\x6F\x67\x69\x6E","\x5F\x73\x65\x6C\x66","\x6F\x70\x65\x6E","\x74\x6F\x46\x69\x78\x65\x64","\x77\x69\x64\x74\x68","\x70\x78","\x63\x73\x73","\x2E\x66\x75\x6C\x6C\x2D\x6D\x65\x6E\x75\x2D\x6C\x69\x73\x74","\x68\x74\x6D\x6C","\x61\x70\x70\x65\x6E\x64","\x70\x6F\x69\x6E\x74\x65\x72","\x2E\x64\x69\x73\x61\x62\x6C\x65\x2D\x73\x6F\x72\x74\x2D\x69\x74\x65\x6D","\x73\x6F\x72\x74\x61\x62\x6C\x65","\x64\x69\x73\x61\x62\x6C\x65\x53\x65\x6C\x65\x63\x74\x69\x6F\x6E","\x49\x73\x50\x69\x6E\x6E\x65\x64","\x49\x63\x6F\x6E\x55\x52\x4C","\x4D\x65\x6E\x75\x4C\x69\x6E\x6B","\x3C\x73\x70\x61\x6E\x20\x63\x6C\x61\x73\x73\x3D\x22\x69\x63\x6F\x6E\x2D\x74\x69\x6C\x65\x20\x66\x61\x20\x66\x61\x2D\x6C\x69\x6E\x6B\x20\x22\x3E\x3C\x2F\x73\x70\x61\x6E\x3E","\x3C\x73\x70\x61\x6E\x20\x63\x6C\x61\x73\x73\x3D\x22\x69\x63\x6F\x6E\x2D\x74\x69\x6C\x65\x20","\x22\x3E\x3C\x2F\x73\x70\x61\x6E\x3E","\x74\x69\x6C\x65\x2D\x73\x6D\x61\x6C\x6C","\x74\x69\x6C\x65","\x74\x69\x6C\x65\x2D\x77\x69\x64\x65","\x74\x69\x6C\x65\x2D\x6C\x61\x72\x67\x65","\x54\x69\x6C\x65\x54\x79\x70\x65","\x73\x75\x62\x73\x74\x72\x69\x6E\x67","\x2E\x2E\x2E","\x50\x61\x74\x68","\x41\x70\x70\x6C\x69\x63\x61\x74\x69\x6F\x6E","\x4D\x65\x6E\x75\x43\x61\x74\x65\x67\x6F\x72\x79","\x55\x52\x4C","\x6D\x65\x6E\x75\x2D\x74\x69\x6C\x65\x2D\x64\x65\x66\x61\x75\x6C\x74\x2D\x63\x6F\x6C\x6F\x72","\x43\x6F\x6C\x6F\x72\x43\x6C\x61\x73\x73","\x55\x73\x65\x72\x4D\x65\x6E\x75\x4C\x69\x6E\x6B\x49\x64","\x3C\x64\x69\x76\x20\x63\x6C\x61\x73\x73\x3D\x22","\x43\x53\x53\x43\x6C\x61\x73\x73","\x20","\x20\x6D\x65\x6E\x75\x2D\x74\x69\x6C\x65\x20\x75\x69\x2D\x77\x69\x64\x67\x65\x74\x2D\x63\x6F\x6E\x74\x65\x6E\x74\x20\x64\x69\x73\x61\x62\x6C\x65\x2D\x73\x6F\x72\x74\x2D\x69\x74\x65\x6D\x22\x20\x64\x61\x74\x61\x2D\x72\x6F\x6C\x65\x3D\x22\x74\x69\x6C\x65\x22\x20\x20\x64\x61\x74\x61\x2D\x75\x72\x6C\x3D\x22","\x22\x20\x74\x69\x74\x6C\x65\x3D\x22","\x22\x20\x75\x73\x65\x72\x4D\x65\x6E\x75\x4C\x69\x6E\x6B\x49\x64\x3D\x22","\x22\x20\x74\x61\x62\x69\x6E\x64\x65\x78\x3D\x22\x30\x22\x20\x3E","\x3C\x64\x69\x76\x20\x63\x6C\x61\x73\x73\x3D\x22\x74\x69\x6C\x65\x2D\x63\x6F\x6E\x74\x65\x6E\x74\x20\x69\x63\x6F\x6E\x69\x63\x22\x3E","\x3C\x73\x70\x61\x6E\x20\x63\x6C\x61\x73\x73\x3D\x22\x74\x69\x6C\x65\x2D\x74\x79\x70\x65\x2D\x62\x74\x6E\x20","\x20\x74\x69\x6C\x65\x2D\x73\x6D\x61\x6C\x6C\x2D\x62\x74\x6E\x20\x66\x61\x20\x66\x61\x2D\x63\x6F\x6D\x70\x72\x65\x73\x73\x22\x20\x74\x69\x74\x6C\x65\x3D\x22\u06A9\u0648\u0686\u06A9\x22\x3E\x3C\x2F\x73\x70\x61\x6E\x3E","\x20\x74\x69\x6C\x65\x2D\x6D\x65\x64\x69\x75\x6D\x2D\x62\x74\x6E\x20\x66\x61\x20\x66\x61\x2D\x73\x71\x75\x61\x72\x65\x22\x20\x74\x69\x74\x6C\x65\x3D\x22\u0645\u062A\u0648\u0633\u0637\x22\x3E\x3C\x2F\x73\x70\x61\x6E\x3E","\x20\x74\x69\x6C\x65\x2D\x77\x69\x64\x65\x2D\x62\x74\x6E\x20\x66\x61\x20\x66\x61\x2D\x61\x72\x72\x6F\x77\x73\x2D\x68\x22\x20\x74\x69\x74\x6C\x65\x3D\x22\u0639\u0631\u06CC\u0636\x22\x3E\x3C\x2F\x73\x70\x61\x6E\x3E","\x20\x74\x69\x6C\x65\x2D\x6C\x61\x72\x67\x65\x2D\x62\x74\x6E\x20\x66\x61\x20\x66\x61\x2D\x65\x78\x70\x61\x6E\x64\x22\x20\x74\x69\x74\x6C\x65\x3D\x22\u0628\u0632\u0631\u06AF\x22\x3E\x3C\x2F\x73\x70\x61\x6E\x3E","\x3C\x73\x70\x61\x6E\x20\x63\x6C\x61\x73\x73\x3D\x22\x74\x69\x6C\x65\x2D\x6C\x61\x62\x65\x6C\x20","\x22\x3E","\x3C\x2F\x73\x70\x61\x6E\x3E","\x3C\x2F\x64\x69\x76\x3E","\x2E\x74\x69\x6C\x65\x2C\x20\x2E\x74\x69\x6C\x65\x2D\x73\x6D\x61\x6C\x6C\x2C\x20\x2E\x74\x69\x6C\x65\x2D\x73\x71\x61\x75\x72\x65\x2C\x20\x2E\x74\x69\x6C\x65\x2D\x77\x69\x64\x65\x2C\x20\x2E\x74\x69\x6C\x65\x2D\x6C\x61\x72\x67\x65\x2C\x20\x2E\x74\x69\x6C\x65\x2D\x62\x69\x67\x2C\x20\x2E\x74\x69\x6C\x65\x2D\x73\x75\x70\x65\x72","\x73\x63\x61\x6C\x65\x28\x2E\x35\x29","\x65\x61\x63\x68","\x73\x63\x61\x6C\x65\x28\x31\x29","\x2E\x33\x73","\x72\x61\x6E\x64\x6F\x6D","\x66\x6C\x6F\x6F\x72","\x30\x73","\x74\x65\x73\x74","\x72\x65\x6D\x6F\x76\x65\x49\x74\x65\x6D","\x64\x69\x76","\x63\x72\x65\x61\x74\x65\x45\x6C\x65\x6D\x65\x6E\x74","\x61\x70\x70\x65\x6E\x64\x54\x6F","\x68\x65\x69\x67\x68\x74","\x63\x6F\x6C\x2D\x6E\x75\x6D\x62\x65\x72","\x61\x74\x74\x72","\x6D\x65\x6E\x75\x2D\x63\x6F\x6C\x75\x6D\x6E","\x4D\x65\x6E\x75\x43\x61\x74\x65\x67\x6F\x72\x79\x49\x64","\x73\x6F\x72\x74\x42\x79","\x64\x69\x76\x5B\x63\x6F\x6C\x2D\x6E\x75\x6D\x62\x65\x72\x3D\x27","\x27\x5D","\x4D\x65\x6E\x75\x4C\x69\x6E\x6B\x49\x64","\x20\x66\x61\x20\x66\x61\x2D\x6C\x69\x6E\x6B\x20","\x70\x69\x6E\x6E\x65\x64","\x3C\x64\x69\x76\x20\x63\x6C\x61\x73\x73\x3D\x22\x6D\x65\x6E\x75\x2D\x69\x74\x65\x6D\x22\x20\x74\x69\x74\x6C\x65\x3D\x22","\x22\x20\x64\x61\x74\x61\x2D\x75\x72\x6C\x3D\x22","\x3C\x73\x70\x61\x6E\x20\x63\x6C\x61\x73\x73\x3D\x22\x74\x69\x74\x6C\x65\x22\x3E","\x3C\x73\x70\x61\x6E\x20\x63\x6C\x61\x73\x73\x3D\x22\x70\x69\x6E\x20\x66\x61\x20\x66\x61\x2D\x74\x68\x75\x6D\x62\x2D\x74\x61\x63\x6B\x20","\x22\x20\x74\x69\x74\x6C\x65\x3D\x22\u0627\u0636\u0627\u0641\u0647\x20\u0628\u0647\x20\u0639\u0644\u0627\u0642\u0647\u200C\u0645\u0646\u062F\u06CC\u200C\u0647\u0627\x22\x20\x64\x61\x74\x61\x2D\x69\x64\x3D\x22","\x22\x20\x3E\x3C\x2F\x73\x70\x61\x6E\x3E","\x3C\x64\x69\x76\x20\x63\x6C\x61\x73\x73\x3D\x22\x61\x70\x70\x6C\x69\x63\x61\x74\x69\x6F\x6E\x2D\x74\x69\x74\x6C\x65\x22\x20\x74\x69\x74\x6C\x65\x3D\x22","\x44\x65\x73\x63\x72\x69\x70\x74\x69\x6F\x6E","\x3A\x20","\x53\x74\x61\x72\x74\x53\x63\x72\x65\x65\x6E","\x69\x6E\x6E\x65\x72\x57\x69\x64\x74\x68","\x69\x6E\x69\x74","\x2E\x74\x69\x6C\x65\x2D\x67\x72\x6F\x75\x70","\x6F\x75\x74\x65\x72\x57\x69\x64\x74\x68","\x2E\x74\x69\x6C\x65\x2D\x61\x72\x65\x61","\x73\x63\x72\x6F\x6C\x6C\x4C\x65\x66\x74","\x6D\x6F\x75\x73\x65\x77\x68\x65\x65\x6C","\x62\x6F\x64\x79","\x2F\x43\x41\x53\x2F\x48\x6F\x6D\x65\x2F\x43\x68\x61\x6E\x67\x65\x55\x73\x65\x72\x4D\x65\x6E\x75\x54\x69\x6C\x65\x54\x79\x70\x65","\x70\x6F\x73\x74","\x73\x6F\x72\x74\x73\x74\x6F\x70","\x75\x73\x65\x72\x4D\x65\x6E\x75\x4C\x69\x6E\x6B\x49\x64","\x23\x73\x6D\x61\x6C\x6C\x2D\x6D\x65\x6E\x75\x20\x2E\x6D\x65\x6E\x75\x2D\x74\x69\x6C\x65","\x2F\x43\x41\x53\x2F\x48\x6F\x6D\x65\x2F\x41\x72\x72\x61\x6E\x67\x65\x55\x73\x65\x72\x4D\x65\x6E\x75\x4C\x69\x6E\x6B\x73","\x50\x4F\x53\x54","\x6A\x73\x6F\x6E","\x61\x6A\x61\x78","\x6F\x6E","\x6F\x66\x66","\x63\x6C\x69\x63\x6B\x20\x20","\x2E\x66\x75\x6C\x6C\x2D\x6D\x65\x6E\x75\x2D\x62\x74\x6E\x31","\x6D\x6F\x75\x73\x65\x64\x6F\x77\x6E\x20\x20","\x2E\x74\x69\x6C\x65\x2D\x74\x79\x70\x65\x2D\x62\x74\x6E","\x70\x72\x65\x76\x65\x6E\x74\x44\x65\x66\x61\x75\x6C\x74","\x2E\x6D\x65\x6E\x75\x2D\x74\x69\x6C\x65","\x63\x6C\x6F\x73\x65\x73\x74","\x30\x2E\x34\x73","\x2E\x74\x69\x6C\x65\x2D\x73\x71\x61\x75\x72\x65","\x74\x69\x6C\x65\x2D\x6C\x61\x72\x67\x65\x2D\x62\x74\x6E","\x68\x61\x73\x43\x6C\x61\x73\x73","\x74\x69\x6C\x65\x2D\x73\x6D\x61\x6C\x6C\x2D\x62\x74\x6E","\x74\x69\x6C\x65\x2D\x6D\x65\x64\x69\x75\x6D\x2D\x62\x74\x6E","\x74\x69\x6C\x65\x2D\x77\x69\x64\x65\x2D\x62\x74\x6E","\x63\x6C\x69\x63\x6B","\x69\x6E\x70\x75\x74","\x23\x74\x72\x61\x73\x68\x2D\x62\x75\x74\x74\x6F\x6E","\x61\x6E\x69\x6D\x61\x74\x65","\x2D\x35\x30\x70\x78","\x72\x65\x73\x69\x7A\x65","\x2E\x70\x69\x6E","\x64\x61\x74\x61\x2D\x69\x64","\x69\x73\x45\x72\x72\x6F\x72","\x2F\x43\x41\x53\x2F\x48\x6F\x6D\x65\x2F\x54\x75\x67\x67\x6C\x65\x50\x69\x6E\x49\x74\x65\x6D","\x2E\x6D\x65\x6E\x75\x2D\x69\x74\x65\x6D\x20\x2C\x20\x2E\x6D\x65\x6E\x75\x2D\x74\x69\x6C\x65\x20\x2C\x20\x23\x73\x65\x61\x72\x63\x68\x54\x65\x78\x74","\x6B\x65\x79\x43\x6F\x64\x65","\x6B\x65\x79\x70\x72\x65\x73\x73","\x2E\x6D\x65\x6E\x75\x2D\x69\x74\x65\x6D","\x74\x72\x69\x67\x67\x65\x72","\x69\x6E\x64\x65\x78","\x65\x71","\x2E\x6D\x65\x6E\x75\x2D\x69\x74\x65\x6D\x3A\x66\x69\x72\x73\x74","\x2E\x6D\x65\x6E\x75\x2D\x74\x69\x6C\x65\x3A\x66\x69\x72\x73\x74","\x74\x61\x70\x68\x6F\x6C\x64","\x64\x69\x73\x61\x62\x6C\x65\x2D\x73\x6F\x72\x74\x2D\x69\x74\x65\x6D","\x68\x65\x61\x64\x65\x72\x2E\x61\x70\x70\x2D\x62\x61\x72\x2E\x6E\x61\x76\x79","\x62\x75\x74\x74\x6F\x6E","\x64\x61\x74\x61\x2D\x75\x72\x6C","\x5F\x62\x6C\x61\x6E\x6B","\x3C\x64\x69\x76\x20\x63\x6C\x61\x73\x73\x3D\x22\x6C\x6F\x61\x64\x69\x6E\x67\x22\x20\x73\x74\x79\x6C\x65\x3D\x22\x74\x65\x78\x74\x2D\x61\x6C\x69\x67\x6E\x3A\x63\x65\x6E\x74\x65\x72\x3B\x22\x3E\x3C\x69\x6D\x67\x20\x73\x72\x63\x3D\x22","\x2F\x43\x44\x4E\x2F\x69\x6D\x61\x67\x65\x73\x2F\x6C\x6F\x61\x64\x2E\x73\x76\x67\x22\x20\x61\x6C\x74\x3D\x22\x22\x20\x2F\x3E\x3C\x2F\x64\x69\x76\x3E","\x65\x76\x65\x6E\x74","\x6D\x6F\x75\x73\x65\x75\x70","\x73\x6F\x72\x74\x73\x74\x61\x72\x74","\x2E\x6D\x65\x6E\x75\x2D\x69\x74\x65\x6D\x20\x2E\x70\x69\x6E","\x65\x78\x70\x6C\x6F\x64\x65","\x64\x72\x61\x67\x67\x61\x62\x6C\x65","\x72\x65\x6D\x6F\x76\x65","\x2F\x43\x41\x53\x2F\x48\x6F\x6D\x65\x2F\x55\x6E\x50\x69\x6E\x49\x74\x65\x6D","\x64\x72\x6F\x70\x70\x61\x62\x6C\x65","\x69\x64","\x74\x61\x72\x67\x65\x74","\x73\x6D\x61\x6C\x6C\x2D\x6D\x65\x6E\x75","\x73\x69\x7A\x65","\x70\x61\x72\x65\x6E\x74\x73","\x61\x70\x70\x2D\x62\x61\x72\x2D\x70\x75\x6C\x6C","\x2E\x61\x70\x70\x2D\x62\x61\x72\x2D\x70\x75\x6C\x6C","\x66\x75\x6C\x6C\x2D\x6D\x65\x6E\x75"];var menuStatuses={close:0,search:1,start:2,fullMenu:3};var editMode=false;var pinMode=false;var dragMode=false;var immediatelyTaphold=false;var menuStatus=menuStatuses[_0x6383[0]];var reloadMenu=false;var MENU_ITEM_HEIGHT=52;var MENU_ITEM_WIDTH=250;var userMenuLinks=orginalUserMenuLinks;var orginalAllMenuLinks=[];var allMenuLinks=[];var menuCategoryIds=[];var cntrlIsPressed=false;var persianChar=[_0x6383[1],_0x6383[2],_0x6383[3],_0x6383[4],_0x6383[5],_0x6383[6],_0x6383[7],_0x6383[8],_0x6383[9],_0x6383[10],_0x6383[11],_0x6383[12],_0x6383[13],_0x6383[14],_0x6383[15],_0x6383[16],_0x6383[17],_0x6383[18],_0x6383[19],_0x6383[20],_0x6383[21],_0x6383[22],_0x6383[23],_0x6383[24],_0x6383[25],_0x6383[26],_0x6383[27],_0x6383[28],_0x6383[29],_0x6383[30],_0x6383[31],_0x6383[32]],englishChar=[_0x6383[33],_0x6383[34],_0x6383[35],_0x6383[36],_0x6383[37],_0x6383[38],_0x6383[39],_0x6383[40],_0x6383[41],_0x6383[42],_0x6383[43],_0x6383[44],_0x6383[45],_0x6383[46],_0x6383[47],_0x6383[48],_0x6383[49],_0x6383[50],_0x6383[51],_0x6383[52],_0x6383[53],_0x6383[54],_0x6383[55],_0x6383[56],_0x6383[57],_0x6383[58],_0x6383[59],_0x6383[60],_0x6383[61],_0x6383[62],_0x6383[63],_0x6383[64]];function ToPersianChars(_0x119bx12){var _0x119bx13=_0x6383[65];for(var _0x119bx14=0;_0x119bx14< _0x119bx12[_0x6383[66]];_0x119bx14++){_0x119bx13+= persianChar[englishChar[_0x6383[67]](_0x119bx12[_0x119bx14])]|| _0x119bx12[_0x119bx14]};return _0x119bx13}function Menu_Column_Height(){return Get_Window_Hight()- 230}function Get_Window_Hight(){return document[_0x6383[69]][_0x6383[68]]}function Get_Window_width(){return document[_0x6383[69]][_0x6383[70]]}$(document)[_0x6383[73]](function(_0x119bx18){if(_0x119bx18[_0x6383[71]]== _0x6383[72]){cntrlIsPressed= true}});$(document)[_0x6383[74]](function(){cntrlIsPressed= false});function CloseMenu(){var _0x119bx1a=$(_0x6383[75]);menuStatus= menuStatuses[_0x6383[0]];_0x119bx1a[_0x6383[77]](_0x6383[76]);var _0x119bx1b=$(_0x6383[78]);_0x119bx1b[_0x6383[79]](_0x6383[76]);$(_0x6383[81])[_0x6383[76]]()[_0x6383[80]]();editMode= false;pinMode= false;$(_0x6383[82])[_0x6383[79]](_0x6383[76]);$(_0x6383[83])[_0x6383[79]](_0x6383[76]);$(_0x6383[84])[_0x6383[79]](_0x6383[76]);$(_0x6383[85])[_0x6383[77]](_0x6383[76])}function ShowMenu(){GetUserMenuDatas(function(){if(orginalUserMenuLinks[_0x6383[66]]== 0){menuStatus= menuStatuses[_0x6383[86]];ShowFullMenu()}else {CreateSmallMenu();menuStatus= menuStatuses[_0x6383[87]];if(Get_Window_width()< 500){$(_0x6383[82])[_0x6383[77]](_0x6383[76]);$(_0x6383[83])[_0x6383[77]](_0x6383[76])};$(_0x6383[88])[_0x6383[77]](_0x6383[76]);$(_0x6383[89])[_0x6383[79]](_0x6383[76]);$(_0x6383[90])[_0x6383[79]](_0x6383[76]);$(_0x6383[75])[_0x6383[79]](_0x6383[76]);AnimateTiles()};$(_0x6383[81])[_0x6383[92]]()[_0x6383[91]]();$(_0x6383[94])[_0x6383[93]]()})}function ShowFullMenu(){menuStatus= menuStatuses[_0x6383[86]];$(_0x6383[88])[_0x6383[79]](_0x6383[76]);$(_0x6383[89])[_0x6383[77]](_0x6383[76]);$(_0x6383[75])[_0x6383[79]](_0x6383[76]);$(_0x6383[78])[_0x6383[77]](_0x6383[76]);if(orginalAllMenuLinks&& orginalAllMenuLinks[_0x6383[66]]> 0){CreateFullMenu()}else {GetMenuDatas(function(){CreateFullMenu()})}}function SearchMenu(){menuStatus= menuStatuses[_0x6383[95]];$(_0x6383[90])[_0x6383[77]](_0x6383[76]);var _0x119bx1f=$(_0x6383[94])[_0x6383[96]]();if(_0x119bx1f== _0x6383[65]){allMenuLinks= orginalAllMenuLinks}else {allMenuLinks= _[_0x6383[98]](orginalAllMenuLinks,function(_0x119bx20){return _0x119bx20[_0x6383[97]][_0x6383[67]](_0x119bx1f)>= 0|| _0x119bx20[_0x6383[97]][_0x6383[67]](ToPersianChars(_0x119bx1f))>= 0})};RefreshMenu()}function RefreshMenu(){if(menuStatus== menuStatuses[_0x6383[86]]|| menuStatus== menuStatuses[_0x6383[95]]){ShowFullMenu()}}function resizeMenuSize(){RefreshMenu()}function MenuClicked(){if(menuStatus!= menuStatuses[_0x6383[0]]){$(_0x6383[94])[_0x6383[96]](_0x6383[65]);CloseMenu()}else {ShowMenu()}}function GetUserMenuDatas(_0x119bx25){if(reloadMenu){$[_0x6383[103]](_0x6383[102])[_0x6383[101]](function(_0x119bx26){orginalUserMenuLinks= _0x119bx26[_0x6383[99]];userMenuLinks= orginalUserMenuLinks;reloadMenu= false;if( typeof (_0x119bx25)== _0x6383[100]){_0x119bx25()}})}else {if( typeof (_0x119bx25)== _0x6383[100]){_0x119bx25()}}}function GetMenuDatas(_0x119bx25){if(localStorageTest()=== true){var _0x119bx28=localStorage[_0x6383[105]](_0x6383[104]+ currentUserId);if(_0x119bx28!= null){var _0x119bx29=JSON[_0x6383[106]](_0x119bx28);orginalAllMenuLinks= _0x119bx29[_0x6383[107]];allMenuLinks= _0x119bx29[_0x6383[107]];menuCategoryIds= _0x119bx29[_0x6383[108]];if( typeof (_0x119bx25)== _0x6383[100]){_0x119bx25()}}else {GetAllMenuLinks()}}else {GetAllMenuLinks()}}function GetAllMenuLinks(){$[_0x6383[103]](_0x6383[111])[_0x6383[101]](function(_0x119bx26){localStorage[_0x6383[110]](_0x6383[104]+ currentUserId,JSON[_0x6383[109]](_0x119bx26));orginalAllMenuLinks= _0x119bx26[_0x6383[107]];allMenuLinks= orginalAllMenuLinks;menuCategoryIds= _0x119bx26[_0x6383[108]];if( typeof (callback)== _0x6383[100]){callback()}})}function NumberOfMenuColumns(){if( typeof (allMenuLinks)== _0x6383[112]){window[_0x6383[115]](_0x6383[113],_0x6383[114]);return 1};return (allMenuLinks[_0x6383[66]]+ menuCategoryIds[_0x6383[66]])/ GetNumberOfItemsInColumn()}function GetNumberOfItemsInColumn(){var _0x119bx13=Menu_Column_Height()/ MENU_ITEM_HEIGHT;if(_0x119bx13< 2){_0x119bx13= 2};return (_0x119bx13)[_0x6383[116]](0)}function SetFullMenuListWidth(){$(_0x6383[120])[_0x6383[119]](_0x6383[117],((NumberOfMenuColumns()+ 1)* MENU_ITEM_WIDTH)[_0x6383[116]](2)+ _0x6383[118])}function CreateSmallMenu(){$(_0x6383[89])[_0x6383[121]](_0x6383[65]);for(var _0x119bx14=0;_0x119bx14< userMenuLinks[_0x6383[66]];_0x119bx14++){$(_0x6383[89])[_0x6383[122]](CreateSmallMenuLink(userMenuLinks[_0x119bx14],_0x119bx14))};$(_0x6383[89])[_0x6383[125]]({opacity:0.7,tolerance:_0x6383[123],cancel:_0x6383[124]});$(_0x6383[89])[_0x6383[126]]()}function CreateSmallMenuLink(_0x119bx30,_0x119bx31){if(_0x119bx30[_0x6383[127]]== false){return _0x6383[65]};var _0x119bx32=_0x6383[65];if(_0x119bx30[_0x6383[129]][_0x6383[128]]== _0x6383[65]){_0x119bx32= _0x6383[130]}else {_0x119bx32= _0x6383[131]+ _0x119bx30[_0x6383[129]][_0x6383[128]]+ _0x6383[132]};var _0x119bx33=_0x6383[65];switch(_0x119bx30[_0x6383[137]]){case 0:_0x119bx33= _0x6383[133];break;case 1:_0x119bx33= _0x6383[134];break;case 2:_0x119bx33= _0x6383[135];break;case 3:_0x119bx33= _0x6383[136];break;default:_0x119bx33= _0x6383[134]};var _0x119bx34=_0x6383[65];var _0x119bx35=_0x119bx30[_0x6383[129]][_0x6383[97]];if(_0x119bx35== null){_0x119bx35= _0x6383[65]};var _0x119bx36=_0x119bx35;if(_0x119bx35[_0x6383[66]]> MaxLabelLength(_0x119bx33)){_0x119bx36= _0x119bx35[_0x6383[138]](0,MaxLabelLength(_0x119bx33)- 2)+ _0x6383[139]};var _0x119bx37=_0x119bx30[_0x6383[129]][_0x6383[142]][_0x6383[141]][_0x6383[140]]+ _0x119bx30[_0x6383[129]][_0x6383[143]];var _0x119bx38=_0x6383[76];if(editMode){_0x119bx38= _0x6383[65]};var _0x119bx39=_0x6383[144];if(_0x119bx30[_0x6383[129]][_0x6383[145]]!= _0x6383[65]){_0x119bx39= _0x119bx30[_0x6383[129]][_0x6383[145]]};var _0x119bx3a=_0x119bx30[_0x6383[146]];return _0x6383[147]+ _0x119bx30[_0x6383[129]][_0x6383[148]]+ _0x6383[149]+ _0x119bx39+ _0x6383[149]+ _0x119bx33+ _0x6383[150]+ _0x119bx37+ _0x6383[151]+ _0x119bx35+ _0x6383[152]+ _0x119bx3a+ _0x6383[153]+ _0x6383[154]+ _0x6383[155]+ _0x119bx38+ _0x6383[156]+ _0x6383[155]+ _0x119bx38+ _0x6383[157]+ _0x6383[155]+ _0x119bx38+ _0x6383[158]+ _0x6383[155]+ _0x119bx38+ _0x6383[159]+ _0x119bx32+ _0x6383[160]+ _0x119bx34+ _0x6383[161]+ _0x119bx36+ _0x6383[162]+ _0x6383[163]+ _0x6383[163]}function MaxLabelLength(_0x119bx33){if(_0x119bx33== _0x6383[134]){return 20}else {if(_0x119bx33== _0x6383[133]){return 16}};return 40}function AnimateTiles(){var _0x119bx3d=$(_0x6383[164]);$[_0x6383[166]](_0x119bx3d,function(){var _0x119bx3e=$(this);_0x119bx3e[_0x6383[119]]({opacity:0,"\x2D\x77\x65\x62\x6B\x69\x74\x2D\x74\x72\x61\x6E\x73\x66\x6F\x72\x6D":_0x6383[165],"\x74\x72\x61\x6E\x73\x66\x6F\x72\x6D":_0x6383[165]})});$[_0x6383[166]](_0x119bx3d,function(){var _0x119bx3e=$(this);setTimeout(function(){_0x119bx3e[_0x6383[119]]({opacity:1,"\x2D\x77\x65\x62\x6B\x69\x74\x2D\x74\x72\x61\x6E\x73\x66\x6F\x72\x6D":_0x6383[167],"\x74\x72\x61\x6E\x73\x66\x6F\x72\x6D":_0x6383[167],"\x2D\x77\x65\x62\x6B\x69\x74\x2D\x74\x72\x61\x6E\x73\x69\x74\x69\x6F\x6E":_0x6383[168],"\x74\x72\x61\x6E\x73\x69\x74\x69\x6F\x6E":_0x6383[168]})},Math[_0x6383[170]](Math[_0x6383[169]]()* 500))});setTimeout(function(){$[_0x6383[166]](_0x119bx3d,function(){var _0x119bx3e=$(this);_0x119bx3e[_0x6383[119]]({"\x2D\x77\x65\x62\x6B\x69\x74\x2D\x74\x72\x61\x6E\x73\x69\x74\x69\x6F\x6E":_0x6383[171],"\x74\x72\x61\x6E\x73\x69\x74\x69\x6F\x6E":_0x6383[171]})})},550)}function localStorageTest(){var _0x119bx40=_0x6383[172];try{localStorage[_0x6383[110]](_0x119bx40,_0x119bx40);localStorage[_0x6383[173]](_0x119bx40);return true}catch(e){return false}}{function CreateFullMenu(){SetFullMenuListWidth();$(_0x6383[120])[_0x6383[121]](_0x6383[65]);var _0x119bx42=0;var _0x119bx43=0;var _0x119bx44=0;for(var _0x119bx14=0;_0x119bx14< NumberOfMenuColumns();_0x119bx14++){var _0x119bx45=document[_0x6383[175]](_0x6383[174]);$(_0x119bx45)[_0x6383[77]](_0x6383[180])[_0x6383[179]](_0x6383[178],_0x119bx14)[_0x6383[119]](_0x6383[177],Menu_Column_Height()+ _0x6383[118])[_0x6383[176]]($(_0x6383[120]))};for(var _0x119bx46 in menuCategoryIds){var _0x119bx47=_[_0x6383[98]](allMenuLinks,function(_0x119bx20){return _0x119bx20[_0x6383[142]][_0x6383[181]]== menuCategoryIds[_0x119bx46]});_0x119bx47= _[_0x6383[182]](_0x119bx47,function(_0x119bx48){return _0x119bx48[_0x6383[97]]});if(_0x119bx47[_0x6383[66]]> 0){if(_0x119bx42< allMenuLinks[_0x6383[66]]+ menuCategoryIds[_0x6383[66]]){$(_0x6383[183]+ _0x119bx44+ _0x6383[184])[_0x6383[122]](CreateApplicationTitle(_0x119bx47[0]));_0x119bx42++};if(_0x119bx43< GetNumberOfItemsInColumn()- 1){_0x119bx43++}else {_0x119bx43= 0;_0x119bx44++};for(var _0x119bx14=0;_0x119bx14< _0x119bx47[_0x6383[66]];_0x119bx14++){if(_0x119bx42< allMenuLinks[_0x6383[66]]+ menuCategoryIds[_0x6383[66]]){$(_0x6383[183]+ _0x119bx44+ _0x6383[184])[_0x6383[122]](CreateFullMenuLink(_0x119bx47[_0x119bx14]));_0x119bx42++};if(_0x119bx43< GetNumberOfItemsInColumn()- 1){_0x119bx43++}else {_0x119bx43= 0;_0x119bx44++}}}}}function CreateFullMenuLink(_0x119bx4a){var _0x119bx32=_0x6383[65];var _0x119bx4b=_0x6383[65];var _0x119bx37=_0x119bx4a[_0x6383[142]][_0x6383[141]][_0x6383[140]]+ _0x119bx4a[_0x6383[143]];var _0x119bx35=_0x119bx4a[_0x6383[97]];var _0x119bx3a=_0x119bx4a[_0x6383[185]];var _0x119bx4c=_0x119bx4a[_0x6383[148]];var _0x119bx39=_0x6383[144];if(_0x119bx4a[_0x6383[145]]!= _0x6383[65]){_0x119bx39= _0x119bx4a[_0x6383[145]]};if(_0x119bx4c== _0x6383[65]){_0x119bx4c= _0x6383[186]};_0x119bx32= _0x6383[131]+ _0x119bx4c+ _0x6383[149]+ _0x119bx39+ _0x6383[132];if(IsPinned(_0x119bx4a)){_0x119bx4b= _0x6383[187]};var _0x119bx4d=_0x6383[76];if(pinMode){_0x119bx4d= _0x6383[65]};return _0x6383[188]+ _0x119bx35+ _0x6383[189]+ _0x119bx37+ _0x6383[153]+ _0x119bx32+ _0x6383[190]+ _0x119bx35+ _0x6383[162]+ _0x6383[191]+ _0x119bx4b+ _0x6383[149]+ _0x119bx4d+ _0x6383[192]+ _0x119bx3a+ _0x6383[193]+ _0x6383[163]}function CreateApplicationTitle(_0x119bx4a){return _0x6383[194]+ _0x119bx4a[_0x6383[142]][_0x6383[141]][_0x6383[195]]+ _0x6383[196]+ _0x119bx4a[_0x6383[142]][_0x6383[97]]+ _0x6383[161]+ _0x6383[190]+ _0x119bx4a[_0x6383[142]][_0x6383[141]][_0x6383[195]]+ _0x6383[196]+ _0x119bx4a[_0x6383[142]][_0x6383[97]]+ _0x6383[162]+ _0x6383[163]}function IsPinned(_0x119bx4a){var _0x119bx30=_[_0x6383[98]](userMenuLinks,function(_0x119bx20){return _0x119bx20[_0x6383[185]]== _0x119bx4a[_0x6383[185]]});return _0x119bx30[0]&& _0x119bx30[0][_0x6383[127]]== true}}(function(_0x119bx50){_0x119bx50[_0x6383[197]]= function(){var _0x119bx51=this;var _0x119bx52=(window[_0x6383[198]]> 0)?window[_0x6383[198]]:screen[_0x6383[117]];_0x119bx51[_0x6383[199]]= function(){_0x119bx53();if(_0x119bx52> 640){_0x119bx57()}};var _0x119bx53=function(){var _0x119bx54=_0x119bx50(_0x6383[200]);var _0x119bx55=80;_0x119bx50[_0x6383[166]](_0x119bx54,function(_0x119bx14,_0x119bx56){if(_0x119bx52<= 640){_0x119bx55= _0x119bx52}else {_0x119bx55+= _0x119bx50(_0x119bx56)[_0x6383[201]]()+ 80}});_0x119bx50(_0x6383[202])[_0x6383[119]]({width:_0x119bx55})};var _0x119bx57=function(){_0x119bx50(_0x6383[205])[_0x6383[204]](function(_0x119bx18,_0x119bx58,_0x119bx59,_0x119bx5a){var _0x119bx1b=_0x119bx50(document);var _0x119bx5b=_0x119bx58* 50;_0x119bx1b[_0x6383[203]](_0x119bx1b[_0x6383[203]]()- _0x119bx5b);return false})};_0x119bx51[_0x6383[199]]()}})(jQuery);function ChangeTileType(_0x119bx3a,_0x119bx5d){$[_0x6383[207]](_0x6383[206],{userMenuLinkId:_0x119bx3a,tileTypeId:_0x119bx5d})[_0x6383[101]](function(_0x119bx13){reloadMenu= true})}$(function(){$(_0x6383[89])[_0x6383[216]](_0x6383[208])[_0x6383[215]](_0x6383[208],function(_0x119bx18,_0x119bx5e){var _0x119bx5f=[];$(_0x6383[210])[_0x6383[166]](function(_0x119bx60){_0x119bx5f[_0x119bx60]= $(this)[_0x6383[179]](_0x6383[209])});$[_0x6383[214]]({url:_0x6383[211],type:_0x6383[212],datatype:_0x6383[213],traditional:true,data:{userMenuLinkIds:_0x119bx5f},success:function(_0x119bx5f){reloadMenu= true}})});$(document)[_0x6383[216]](_0x6383[217],_0x6383[218])[_0x6383[215]](_0x6383[217],_0x6383[218],function(){if(menuStatus== menuStatuses[_0x6383[87]]|| menuStatus== menuStatuses[_0x6383[95]]){ShowFullMenu(false)}});$(document)[_0x6383[216]](_0x6383[219],_0x6383[220])[_0x6383[215]](_0x6383[219],_0x6383[220],function(_0x119bx61){_0x119bx61[_0x6383[221]]();var _0x119bx62=$(this);var _0x119bx63=_0x119bx62[_0x6383[223]](_0x6383[222]);var _0x119bx3a=_0x119bx63[_0x6383[179]](_0x6383[209]);_0x119bx63[_0x6383[119]]({"\x2D\x77\x65\x62\x6B\x69\x74\x2D\x74\x72\x61\x6E\x73\x69\x74\x69\x6F\x6E":_0x6383[224],"\x74\x72\x61\x6E\x73\x69\x74\x69\x6F\x6E":_0x6383[224]});_0x119bx63[_0x6383[79]](_0x6383[134])[_0x6383[79]](_0x6383[133])[_0x6383[79]](_0x6383[225])[_0x6383[79]](_0x6383[135])[_0x6383[79]](_0x6383[136]);if(_0x119bx62[_0x6383[227]](_0x6383[226])){_0x119bx63[_0x6383[77]](_0x6383[136]);ChangeTileType(_0x119bx3a,3)}else {if(_0x119bx62[_0x6383[227]](_0x6383[228])){_0x119bx63[_0x6383[77]](_0x6383[133]);ChangeTileType(_0x119bx3a,0)}else {if(_0x119bx62[_0x6383[227]](_0x6383[229])){_0x119bx63[_0x6383[77]](_0x6383[134]);ChangeTileType(_0x119bx3a,1)}else {if(_0x119bx62[_0x6383[227]](_0x6383[230])){_0x119bx63[_0x6383[77]](_0x6383[135]);ChangeTileType(_0x119bx3a,2)}}}};_0x119bx63[_0x6383[119]]({"\x2D\x77\x65\x62\x6B\x69\x74\x2D\x74\x72\x61\x6E\x73\x69\x74\x69\x6F\x6E":_0x6383[171],"\x74\x72\x61\x6E\x73\x69\x74\x69\x6F\x6E":_0x6383[171]});return false});$(document)[_0x6383[216]](_0x6383[231],_0x6383[94])[_0x6383[215]](_0x6383[231],_0x6383[94],function(){SearchMenu()});$(document)[_0x6383[216]](_0x6383[232],_0x6383[94])[_0x6383[215]](_0x6383[232],_0x6383[94],function(){SearchMenu()});function _0x119bx64(){var _0x119bx65=($(_0x6383[89])[_0x6383[117]]()/ 2)- ($(_0x6383[233])[_0x6383[117]]()/ 2);$(_0x6383[233])[_0x6383[119]]({"\x6D\x61\x72\x67\x69\x6E\x2D\x72\x69\x67\x68\x74":_0x119bx65+ _0x6383[118],"\x6D\x61\x72\x67\x69\x6E\x2D\x74\x6F\x70":_0x6383[235]})[_0x6383[234]]({"\x6D\x61\x72\x67\x69\x6E\x2D\x74\x6F\x70":0+ _0x6383[118]},400)}var _0x119bx66;$(window)[_0x6383[236]](function(){clearTimeout(_0x119bx66);_0x119bx66= setTimeout(resizeMenuSize,100)});$(document)[_0x6383[216]](_0x6383[217],_0x6383[237])[_0x6383[215]](_0x6383[217],_0x6383[237],function(_0x119bx61){_0x119bx61[_0x6383[221]]();var _0x119bx62=$(this);var _0x119bx3a=$(this)[_0x6383[179]](_0x6383[238]);$[_0x6383[207]](_0x6383[240],{menuLinkId:_0x119bx3a})[_0x6383[101]](function(_0x119bx13){if(_0x119bx13[_0x6383[239]]== false){if($(_0x119bx62)[_0x6383[227]](_0x6383[187])){$(_0x119bx62)[_0x6383[79]](_0x6383[187])}else {$(_0x119bx62)[_0x6383[77]](_0x6383[187])};reloadMenu= true}})});$(document)[_0x6383[216]](_0x6383[74],_0x6383[241])[_0x6383[215]](_0x6383[74],_0x6383[241],function(_0x119bx18){if(_0x119bx18[_0x6383[242]]== 27){CloseMenu()}});$(document)[_0x6383[216]](_0x6383[243],_0x6383[244])[_0x6383[215]](_0x6383[243],_0x6383[244],function(_0x119bx18){if(_0x119bx18[_0x6383[242]]== 13){$(this)[_0x6383[245]](_0x6383[231])}});$(document)[_0x6383[216]](_0x6383[243],_0x6383[222])[_0x6383[215]](_0x6383[243],_0x6383[222],function(_0x119bx18){if(_0x119bx18[_0x6383[242]]== 13){$(this)[_0x6383[245]](_0x6383[231])}});$(document)[_0x6383[216]](_0x6383[73],_0x6383[244])[_0x6383[215]](_0x6383[73],_0x6383[244],function(_0x119bx61){if(menuStatus== menuStatuses[_0x6383[86]]){switch(_0x119bx61[_0x6383[242]]){case 37:break;case 38:$(_0x6383[244])[_0x6383[247]](parseInt($(_0x6383[244])[_0x6383[246]]($(this)),10)- 1)[_0x6383[93]]();break;case 39:break;case 40:$(_0x6383[244])[_0x6383[247]](parseInt($(_0x6383[244])[_0x6383[246]]($(this)),10)+ 1)[_0x6383[93]]();break;case 8:$(_0x6383[94])[_0x6383[93]]();break;case 46:$(_0x6383[94])[_0x6383[93]]();break;default:}}});$(document)[_0x6383[216]](_0x6383[73],_0x6383[222])[_0x6383[215]](_0x6383[73],_0x6383[222],function(_0x119bx61){if(menuStatus== menuStatuses[_0x6383[87]]){if(_0x119bx61[_0x6383[242]]== 37){}else {if(_0x119bx61[_0x6383[242]]== 38){$(_0x6383[222])[_0x6383[247]](parseInt($(_0x6383[222])[_0x6383[246]]($(this)),10)- 1)[_0x6383[93]]()}else {if(_0x119bx61[_0x6383[242]]== 39){}else {if(_0x119bx61[_0x6383[242]]== 40){$(_0x6383[222])[_0x6383[247]](parseInt($(_0x6383[222])[_0x6383[246]]($(this)),10)+ 1)[_0x6383[93]]()}}}}}});$(document)[_0x6383[216]](_0x6383[73],_0x6383[94])[_0x6383[215]](_0x6383[73],_0x6383[94],function(_0x119bx61){if(menuStatus== menuStatuses[_0x6383[86]]){if(_0x119bx61[_0x6383[242]]== 40){$(_0x6383[248])[_0x6383[93]]()}}else {if(menuStatus== menuStatuses[_0x6383[87]]){if(_0x119bx61[_0x6383[242]]== 40){$(_0x6383[249])[_0x6383[93]]()}}}});$(document)[_0x6383[216]](_0x6383[250],_0x6383[222])[_0x6383[215]](_0x6383[250],_0x6383[222],function(_0x119bx61){if(!dragMode&& canUserEditMenu){_0x119bx67()};_0x119bx61[_0x6383[221]]();return false});function _0x119bx67(){if(editMode){$(_0x6383[220])[_0x6383[77]](_0x6383[76]);$(_0x6383[222])[_0x6383[77]](_0x6383[251]);$(_0x6383[252])[_0x6383[79]](_0x6383[76]);$(_0x6383[85])[_0x6383[77]](_0x6383[76]);_0x119bx64();immediatelyTaphold= true}else {$(_0x6383[220])[_0x6383[79]](_0x6383[76]);$(_0x6383[222])[_0x6383[79]](_0x6383[251]);$(_0x6383[252])[_0x6383[77]](_0x6383[76]);$(_0x6383[85])[_0x6383[79]](_0x6383[76]);_0x119bx64()};editMode=  !editMode}function _0x119bx68(_0x119bx69,_0x119bx61){if(immediatelyTaphold){immediatelyTaphold= false}else {if(!editMode){if(_0x119bx61&& (_0x119bx61[_0x6383[71]]== 2|| _0x119bx61[_0x6383[253]]== 4|| cntrlIsPressed)){window[_0x6383[115]](_0x119bx69[_0x6383[179]](_0x6383[254]),_0x6383[255])}else {_0x119bx69[_0x6383[122]](_0x6383[256]+ cdnPrefix+ _0x6383[257]);window[_0x6383[115]](_0x119bx69[_0x6383[179]](_0x6383[254]),_0x6383[114])}}};return false}$(document)[_0x6383[216]](_0x6383[231],_0x6383[222])[_0x6383[215]](_0x6383[231],_0x6383[222],function(_0x119bx61){_0x119bx61[_0x6383[221]]();_0x119bx61= _0x119bx61|| window[_0x6383[258]];_0x119bx68($(this),_0x119bx61)});$(document)[_0x6383[216]](_0x6383[259],_0x6383[222])[_0x6383[215]](_0x6383[259],_0x6383[222],function(_0x119bx61){_0x119bx61[_0x6383[221]]();_0x119bx61= _0x119bx61|| window[_0x6383[258]];if(_0x119bx61[_0x6383[71]]== 2|| _0x119bx61[_0x6383[253]]== 4){_0x119bx68($(this),_0x119bx61)}});$(_0x6383[89])[_0x6383[215]](_0x6383[260],function(_0x119bx18,_0x119bx5e){dragMode= true});$(_0x6383[89])[_0x6383[215]](_0x6383[208],function(_0x119bx18,_0x119bx5e){dragMode= false});function _0x119bx6a(_0x119bx69,_0x119bx61){_0x119bx61= _0x119bx61|| window[_0x6383[258]];_0x119bx61[_0x6383[221]]();if(immediatelyTaphold){immediatelyTaphold= false}else {if(!pinMode){if(_0x119bx61&& (_0x119bx61[_0x6383[71]]== 2|| _0x119bx61[_0x6383[253]]== 4|| cntrlIsPressed)){window[_0x6383[115]](_0x119bx69[_0x6383[179]](_0x6383[254]),_0x6383[255])}else {_0x119bx69[_0x6383[122]](_0x6383[256]+ cdnPrefix+ _0x6383[257]);window[_0x6383[115]](_0x119bx69[_0x6383[179]](_0x6383[254]),_0x6383[114])}}};return false}$(document)[_0x6383[216]](_0x6383[231],_0x6383[244])[_0x6383[215]](_0x6383[231],_0x6383[244],function(_0x119bx61){_0x119bx6a($(this),_0x119bx61)});$(document)[_0x6383[216]](_0x6383[259],_0x6383[244])[_0x6383[215]](_0x6383[259],_0x6383[244],function(_0x119bx61){_0x119bx61[_0x6383[221]]();_0x119bx61= _0x119bx61|| window[_0x6383[258]];if(_0x119bx61[_0x6383[71]]== 2|| _0x119bx61[_0x6383[253]]== 4){_0x119bx6a($(this),_0x119bx61)}});$(document)[_0x6383[216]](_0x6383[250],_0x6383[244])[_0x6383[215]](_0x6383[250],_0x6383[244],function(_0x119bx61){_0x119bx61[_0x6383[221]]();immediatelyTaphold= true;pinMode=  !pinMode;if(pinMode){$(_0x6383[261])[_0x6383[79]](_0x6383[76])}else {$(_0x6383[261])[_0x6383[77]](_0x6383[76])};return false});$(_0x6383[233])[_0x6383[266]]({over:function(_0x119bx18,_0x119bx5e){},drop:function(_0x119bx18,_0x119bx5e){_0x119bx5e[_0x6383[263]][_0x6383[76]](_0x6383[262],{pieces:25},1000);var _0x119bx62=_0x119bx5e[_0x6383[263]];var _0x119bx63=_0x119bx62[_0x6383[223]](_0x6383[222]);var _0x119bx3a=_0x119bx63[_0x6383[179]](_0x6383[209]);$[_0x6383[207]](_0x6383[265],{menuLinkId:_0x119bx3a})[_0x6383[101]](function(_0x119bx13){if(_0x119bx13[_0x6383[239]]== false){_0x119bx63[_0x6383[76]](_0x6383[262],800);_0x119bx5e[_0x6383[263]][_0x6383[264]]()}})}});$(document)[_0x6383[216]](_0x6383[231],_0x6383[205])[_0x6383[215]](_0x6383[231],_0x6383[205],function(_0x119bx61){if(menuStatus!= menuStatuses[_0x6383[0]]){if(!(_0x119bx61[_0x6383[268]][_0x6383[267]]== _0x6383[269]|| $(_0x119bx61[_0x6383[268]])[_0x6383[271]](_0x6383[89])[_0x6383[270]]()|| _0x119bx61[_0x6383[268]][_0x6383[227]]== _0x6383[272]|| $(_0x119bx61[_0x6383[268]])[_0x6383[271]](_0x6383[273])[_0x6383[270]]()|| _0x119bx61[_0x6383[268]][_0x6383[267]]== _0x6383[274]|| $(_0x119bx61[_0x6383[268]])[_0x6383[271]](_0x6383[88])[_0x6383[270]]())){CloseMenu()}}})})
+
+	//For message passing System
+	var isAuthenticated = "True";
+	var loadingHtml = '<div style="text-align:center;"><img src="https://uastcdn.uast.ac.ir/CDN/images/load.svg" alt="" /></div>';
+	function getUnseenMessageCount() {
+		$.get("/CAS/MessagingSystem/GetUnseenNotificationCount").success(function(result) {
+			$(".unSeenMessageCount").html(result.unSeenNotificationCount);
+		});
+	};
+
+	function ShowAlertDialogIfNeed() {
+		$.get("/CAS/MessagingSystem/GetUnseenAlertCount").success(function(result) {
+			if (result.unSeenAlertCount > 0)
+				$("#common-dialog").loadDialog({ url: '/CAS/MessagingSystem/Alerts', title: 'توجه' });
+		});
+	};
+
+	$(function() {
+		
+		$(document).off('click', '#notification-button');
+		$(document).on('click','#notification-button',
+			function() {
+				if ($('#notification-panel').css('display') == 'none') {
+					$.get("/CAS/MessagingSystem/Notifications").success(function(result) {
+						$("#notification-panel").html(result);
+					});
+				}
+				$("#notification-panel").slideToggle(150);
+			});
+
+
+		$(document).off('click', '#ticket-button');
+		$(document).on('click','#ticket-button',
+			function() {
+				$("#ticket-panel").slideToggle(150);
+				
+			});
+
+
+		if (isAuthenticated == "True") {
+			if (!disableIt) {
+				getUnseenMessageCount();
+			}
+			if (!disableIt && location.pathname.indexOf('/ShowAllMessages') == -1) {
+				ShowAlertDialogIfNeed();
+			}
+		}
+		//اخرین گریدی که روی آن کلیک شده است
+		$('.k-grid').click(function() {
+			lastId = $(this).attr("id");
+			GridCellClick(lastId);
+		});
+
+		$(document).off('click', '#HamavaHelp');
+		$(document).on('click','#HamavaHelp',function() {
+			ChekHelp("true");
+		});
+
+		ChekHelp("false");
+	});
+
+	
+
+	function ChekHelp(showDialog) {
+		$.get("/CAS/Help/CheckHelp", { currentPageUrl: window.location.pathname })
+			.success(function(res) {
+				if ((res.HelpUrl == null || res.HelpUrl.length === 0) && res.HamavaHelpId.length === 0) {
+					$('#HamavaHelp .grow').addClass('not-active').removeClass('grow');
+				}
+				if(showDialog === "true") {
+					ShowHelpDialog(res);
+				}
+			}).fail(function(res) {
+				$('#HamavaHelp .grow').addClass('not-active').removeClass('grow');
+			});
+	}
+
+    $(document).on('click', '.changeAccountLogin', function (e) {
+        e.preventDefault();
+        var destinationUserTypeId = $(this).data("usertype");
+        if (1 < destinationUserTypeId )
+            {
+			    //validate Clerk User Pass
+                $("#linkAccountUserId").val($(this).data("userid"));
+                $("#linkAccount-panel").slideToggle(150);
+		}
+		else {
+			var selectedUserId = $(this).data('userid');
+            var changeLinkAccountUrl = "/cas/Account/ChangeAccountLogin?userId=" + selectedUserId;
+            window.open(changeLinkAccountUrl, "_self")
+        }
+	});
+
+    $(document).on('click', '#submit-linkaccount', function (e) {
+        e.preventDefault();
+        var $this = $(this);
+        var $form = $(this).closest('form');
+        var values = $form.serialize();
+
+        $.ajax({
+            url: $form.attr('action'),
+            type: $form.attr('method'),
+            datatype: "json",
+            traditional: true,
+            data: values,
+            success: function (result) {
+                if (result.IsOk) {
+                    var selectedUserId = $("#linkAccountUserId").val();
+                    var changeLinkAccountUrl = "/CAS/Account/ChangeAccountLogin" + "?userId=" + selectedUserId;
+                    //var changeLinkAccountUrl = "/cas/Account/ChangeAccountLogin?userId=" + selectedUserId;
+                    window.open(changeLinkAccountUrl, "_self");
+                }
+                else {
+                    $.alert(result.message);
+                    return false;
+                }
+            },
+            error: function (event, request, settings) {
+                ajax_exception(event);
+            },
+            timeout: 50000
+        });
+    });
+
+    $(document).on('click', '#cancel-linkaccount', function () {
+        $("#linkAccount-panel").slideToggle(150);
+    });
+
+	function ShowHelpDialog(res) {
+		if (res.HelpUrl == null || res.HelpUrl.length === 0) {
+			$("#common-dialog").loadDialog({
+				url: '/CAS/Help/Help',
+				data: { hamavaHelpId: res.HamavaHelpId },
+				title: 'راهنما'
+			});
+		} else {
+			window.open(res.HelpUrl);
+		}
+	}
+</script>
+
+
+
+
+    <div class="container-fluid">
+        
+
+<style>
+	#master-notification {
+		min-height: 250px;
+		border: 1px solid #1E457A;
+	}
+
+	#effect {
+		width: 100%;
+		min-height: 250px;
+		/*position: relative;*/
+		/*box-shadow: 0 10px 6px -6px #777;*/
+	}
+
+	#other-notifications {
+		margin-top: 20px;
+	}
+
+	body input.login-button {
+		margin-left: 0px;
+	}
+
+	.notification-title {
+		background-color: #265799;
+		color: #fff;
+		padding: 10px;
+	}
+
+	.notification-item {
+		background-color: #265799;
+		color: #fff;
+		padding: 12px;
+		margin-top: 5px;
+		cursor: pointer;
+	}
+
+	.notification-panel-content {
+		max-height: 500px;
+		overflow-y: auto;
+	}
+</style>
+<div id="applications-panel" class="row">
+
+	
+
+	
+	
+</div>
+<div id="desktop" style="position: relative;">
+<div class="panel">
+	<div class="panel-heading">
+		<label>خوش آمدید.</label>
+	</div>
+	<div class="panel-body">
+		<div class="col-sm-10">
+			<div class="row">
+				<label class="col-sm-2 control-label">
+					نام خانوادگی
+				</label>
+				<div class="col-sm-3 text-right">
+					پاشائی
+				</div>
+				<label for="نیمسال ورود" class="control-label col-sm-2">نیمسال ورود</label>
+				<div class="col-sm-3 text-right">
+					نیمسال دوم 1405-1404
+				</div>
+			</div>
+			<div class="row">
+				<label class="col-sm-2 control-label">
+					دانشکده
+				</label>
+				<div class="col-sm-3 text-right">
+					صنعت
+
+				</div>
+				<label class="col-sm-2 control-label">
+					رشته
+				</label>
+				<div class="col-sm-3 text-right">
+					کاردانی فنی برق-برق صنعتی
+				</div>
+			</div>
+			<div class="row">
+				<label class="col-sm-2 control-label">
+					مقطع
+				</label>
+				<div class="col-sm-3 text-right">
+					کاردانی فنی
+				</div>
+				<label for="وضعیت کلی دانشجو" class="control-label col-sm-2">وضعیت کلی دانشجو</label>
+				<div class="col-sm-3 text-right">
+					درحال تحصيل <span>(فعال)</span>
+					
+				</div>
+			</div>
+			<div class="row">
+				<label for="سهمیه قبولی" class="control-label col-sm-2">سهمیه قبولی</label>
+				<div class="col-sm-3 text-right">
+					آزاد-بومی-مهارتی-مرتبط
+				</div>
+				<label class="col-sm-2 control-label">
+					نوع دوره
+				</label>
+				<div class="col-sm-3 text-right">
+					ترمی
+				</div>
+			</div>
+
+		</div>
+		<div class="col-sm-2">
+            
+            
+		</div>
+	</div>
+</div>
+
+<div class="panel">
+	<div class="panel-heading">
+		<label>پیام&zwnj;ها</label>
+	</div>
+	<div class="panel-body">
+		<div class="row pull-right" id="userNotifications" style="position: relative;">
+
+
+<style>
+    .master-notification {
+        min-height: 100px;
+        border: 1px solid #1E457A;
+        margin: 10px;
+    }
+
+    .notification-title {
+        background-color: #265799;
+        color: #fff;
+        padding: 10px;
+    }
+
+    #userNotifications {
+        width: 100% !important;
+    }
+</style>
+<script>
+    $(function () {
+        $(document).off("click", ".select-notification-btn");
+        $(document).on("click", ".select-notification-btn", function () {
+
+            $("#common-dialog").loadDialog({
+                title: "اطلاعیه",
+                url: '/CAS/Notifications/NotificationDetails',
+                data: { id: $(this).prop('id') }
+            });
+
+            return false;
+        });
+
+    });
+
+    function gridEvent() {
+        $("#unReadUserNotificationsGrid table thead.k-grid-header").hide();
+    }
+</script>
+
+    <label class="col-sm-12 control-label text-right" style="text-align:right">پیامی برای شما ثبت نشده است</label>
+<div class="modal fade" id="noti-modal" role="dialog"></div></div>
+	</div>
+</div>
+<div class="panel">
+	<div class="panel-heading">
+		<label>اخبار قابلیت&zwnj;ها و اصلاحات</label>
+	</div>
+	<div class="panel-body">
+		<div class="row pull-right" id="user-feature-history" style="position: relative;">
+
+<style>
+	.master-notification {
+		min-height: 100px;
+		border: 1px solid #1E457A;
+		margin: 10px;
+	}
+
+	.notification-title {
+		background-color: #265799;
+		color: #fff;
+		padding: 10px;
+	}
+
+	#userNotifications {
+		width: 100% !important;
+	}
+
+	.blink_me {
+		animation: blinker 1s linear infinite;
+	}
+
+	@keyframes blinker {
+		50% {
+			opacity: 0;
+		}
+	}
+
+	.invisible {
+		display: none;
+	}
+
+	.fa.fa-bolt {
+		color: red;
+		font-size: 1.5em;
+		text-shadow: 1px 1px 1px gray;
+	}
+</style>
+<script>
+	$(function () {
+		$(document).off("click", ".select-feature-btn");
+		$(document).on("click", ".select-feature-btn", function () {
+
+			$("#common-dialog").loadDialog({
+				title: "قابلیت&zwnj;ها واصلاحات ",
+				url: '/CAS/FeatureAndReformHistory/UserDetails',
+				data: { id: $(this).prop('id') }
+			});
+
+			return false;
+		});
+
+	});
+
+	function gridEvent() {
+		$("#unReadUserFeatureAndReformHistoryGrid table thead.k-grid-header").hide();
+		var grid = $("#unReadUserFeatureAndReformHistoryGrid").data("kendoGrid");
+		var gridData = grid.dataSource.view();
+		for (var i = 0; i < gridData.length; i++) {
+			var now = new Date();
+			now.setDate(now.getDate() - 5);
+			if (gridData[i].CreateDate < now) {
+				var select = grid.tbody.find(">tr[data-uid='" + gridData[i].uid + "'] i.blink_me");
+				$(select).addClass("invisible");
+			}
+		}
+	}
+</script>
+
+	<label class="col-sm-12 control-label text-right" style="text-align:right">قابلیت و اصلاحات جدیدی برای شما ثبت نشده است</label>
+</div>
+	</div>
+</div>
+
+
+<script>
+	$("#userNotifications").loadContent({
+	    url: '/Cas/Notifications/ShowUnReadUserNotifications?userCenterId=' + '8aa5ecd5-cd52-47fd-8d54-83fbbfba2511' + '&userTypeId=1',
+	    cache: true,
+	});
+	$("#user-feature-history").loadContent({
+	    url: '/Cas/FeatureAndReformHistory/ShowFeatureAndReformHistories?userCenterTypeId=4&userTypeId=1',
+	    cache: true,
+	});
+</script>
+</div>
+
+<script type="text/javascript">
+	$(function () {
+
+
+	});
+
+</script>
+
+
+<script>
+	var notificationUrl = '/CAS/Notifications/GetNotification';
+	var userTypeId = '1';
+	$(function () {
+		if (userTypeId == 3) {
+			$("#desktop").loadContent({
+				url: '/Education/Home/ClarkDesctop'
+			});
+		}
+		else if (userTypeId == 1) {
+				$("#desktop").loadContent({
+					url: '/Education/Home/StudentDesktop?userId='+'95fdfd07-6df2-443d-b16f-5f53f3422619',
+                    cache:true,
+				});
+			}
+			else if (userTypeId == 2) {
+				$("#desktop").loadContent({
+					url: '/Education/Home/ProfessorDesctop'
+				});
+			}
+		$('.notification-item').off('click')
+			.on('click', function (e) {
+				e.preventDefault();
+				//$('#effect').css("display", "none");
+				$("#effect").hide();
+				var $this = $(this);
+				var notificationId = $this.data("notificationid");
+				$.get(notificationUrl, { id: notificationId })
+				.success(function (result) {
+					var oldtopId = $('#master-notification').data("notificationid");
+					var oldTopTitle = $('#master-notification .notification-title').text();
+					$('#master-notification .notification-title').html(result.Title);
+					$('#master-notification .notification-body').html(result.Body);
+					$('#master-notification').data("notificationid", result.NotificationId);
+					$('#effect').effect("slide", { direction: 'right', mode: 'show' }, 1000);//, origin: ['bottom', 'left']
+					//runEffect();
+					$this.html(oldTopTitle);
+					$this.data("notificationid", oldtopId);
+				})
+				.fail(function (e) { });
+			});
+
+		function runEffect() {
+
+			// get effect type from
+			var selectedEffect = "scale";
+
+			// Most effect types need no options passed by default
+			var options = {};
+			// some effects have required parameters
+			if (selectedEffect === "scale") {
+				options = { percent: 80, direction: 'vertical', effect: "slide" };
+			} else if (selectedEffect === "size") {
+				options = { to: { width: 280, height: 185 } };
+			}
+
+			// Run the effect
+			$("#effect").show(selectedEffect, options, 1000, callback);
+		};
+
+		function callback() {
+			//setTimeout(function () {
+			//	$("#effect:visible").removeAttr("style").fadeOut();
+			//}, 1000);
+		};
+
+	});
+</script>
+
+    </div>
+    <div id="common-dialog" class="modal fade k-rtl common-dialog" role="dialog" title="dialog Window">
+        <div class="modal-dialog">
+            <div id="common-dialog-content" class="modal-content">
+            </div>
+        </div>
+    </div>
+
+
+
+
+<script src="https://uastcdn.uast.ac.ir/CDN/js/kendo-ui/new/kendo.upload.min.js"></script>
+<script>
+    kendo.culture("fa-IR");
+</script>
+<script type="text/javascript" title="common message">
+    //تمام کدها به منو منتقل شد به جهت افزایش دسترسی سیستم ارسال پیام
+    
+</script></body></html>
