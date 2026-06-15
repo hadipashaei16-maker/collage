@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>پرتال دانشجویی - مرکز آموزش علمی-کاربردی مبارکه</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0f2942;
+    --navy-mid: #1a3d5c;
+    --navy-light: #254d72;
+    --accent: #2196F3;
+    --accent-light: #e3f2fd;
+    --accent-mid: #1565C0;
+    --gold: #F9A825;
+    --gold-light: #fff8e1;
+    --surface: #f5f7fa;
+    --surface-2: #eef1f5;
+    --white: #ffffff;
+    --text-primary: #1a2332;
+    --text-secondary: #4a5568;
+    --text-muted: #8a96a3;
+    --border: #e2e8f0;
+    --border-strong: #c4cdd6;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.10), 0 4px 8px rgba(0,0,0,0.05);
+    --transition: all 0.2s ease;
+  }
+
+  body {
+    font-family: 'Vazirmatn', Tahoma, sans-serif;
+    background: var(--surface);
+    color: var(--text-primary);
+    direction: rtl;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ---- TOPBAR ---- */
+  .topbar {
+    background: var(--navy);
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    gap: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.20);
+  }
+
+  .topbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .topbar-logo {
+    width: 36px;
+    height: 36px;
+    background: var(--gold);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--navy);
+    flex-shrink: 0;
+  }
+
+  .topbar-title {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.3;
+    max-width: 200px;
+  }
+
+  .topbar-title span {
+    display: block;
+    font-size: 11px;
+    color: rgba(255,255,255,0.55);
+    font-weight: 400;
+  }
+
+  .topbar-spacer { flex: 1; }
+
+  .topbar-search {
+    display: flex;
+    align-items: center;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 40px;
+    padding: 0 14px;
+    gap: 8px;
+    height: 36px;
+    transition: var(--transition);
+  }
+
+  .topbar-search:focus-within {
+    background: rgba(255,255,255,0.14);
+    border-color: rgba(255,255,255,0.25);
+  }
+
+  .topbar-search input {
+    background: none;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-family: inherit;
+    font-size: 13px;
+    width: 160px;
+    direction: rtl;
+  }
+
+  .topbar-search input::placeholder { color: rgba(255,255,255,0.4); }
+
+  .topbar-search svg { color: rgba(255,255,255,0.45); flex-shrink: 0; }
+
+  .topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .topbar-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.65);
+    transition: var(--transition);
+    position: relative;
+  }
+
+  .topbar-btn:hover {
+    background: rgba(255,255,255,0.10);
+    color: #fff;
+  }
+
+  .badge-dot {
+    position: absolute;
+    top: 6px;
+    left: 7px;
+    width: 8px;
+    height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    border: 2px solid var(--navy);
+  }
+
+  .topbar-divider {
+    width: 1px;
+    height: 24px;
+    background: rgba(255,255,255,0.12);
+    margin: 0 4px;
+  }
+
+  .user-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 40px;
+    padding: 0 12px 0 6px;
+    height: 36px;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .user-chip:hover { background: rgba(255,255,255,0.14); }
+
+  .user-avatar {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .user-name {
+    font-size: 12px;
+    color: rgba(255,255,255,0.85);
+    font-weight: 500;
+  }
+
+  /* ---- LAYOUT ---- */
+  .layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: calc(100vh - 60px);
+  }
+
+  /* ---- SIDEBAR ---- */
+  .sidebar {
+    background: var(--white);
+    border-left: 1px solid var(--border);
+    padding: 20px 0;
+    overflow-y: auto;
+    position: sticky;
+    top: 60px;
+    height: calc(100vh - 60px);
+  }
+
+  .sidebar-section {
+    margin-bottom: 8px;
+  }
+
+  .sidebar-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0 20px 6px;
+    margin-top: 4px;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 20px;
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 400;
+    border-right: 3px solid transparent;
+    transition: var(--transition);
+    cursor: pointer;
+  }
+
+  .nav-item svg {
+    color: var(--text-muted);
+    flex-shrink: 0;
+    transition: var(--transition);
+  }
+
+  .nav-item:hover {
+    background: var(--surface);
+    color: var(--text-primary);
+  }
+
+  .nav-item:hover svg { color: var(--accent); }
+
+  .nav-item.active {
+    background: var(--accent-light);
+    color: var(--accent-mid);
+    font-weight: 500;
+    border-right-color: var(--accent);
+  }
+
+  .nav-item.active svg { color: var(--accent); }
+
+  .nav-badge {
+    margin-right: auto;
+    background: var(--accent-light);
+    color: var(--accent-mid);
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 20px;
+  }
+
+  /* ---- MAIN ---- */
+  .main {
+    padding: 28px 32px;
+    max-width: 960px;
+  }
+
+  .page-header {
+    margin-bottom: 28px;
+  }
+
+  .page-greeting {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+
+  .page-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  /* ---- QUICK STATS ---- */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .stat-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 18px 20px;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+  }
+
+  .stat-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+
+  .stat-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  .stat-icon.blue { background: #e3f2fd; color: #1565C0; }
+  .stat-icon.green { background: #e8f5e9; color: #2E7D32; }
+  .stat-icon.amber { background: #fff8e1; color: #E65100; }
+  .stat-icon.purple { background: #ede7f6; color: #4527A0; }
+
+  .stat-value {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  /* ---- SECTION TITLE ---- */
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .section-link {
+    font-size: 12px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* ---- QUICK ACCESS TILES ---- */
+  .tiles-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .tile {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .tile:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+    border-color: var(--border-strong);
+  }
+
+  .tile-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tile-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+
+  /* tile color variants */
+  .t-blue  .tile-icon { background: #e3f2fd; color: #1565C0; }
+  .t-green .tile-icon { background: #e8f5e9; color: #2E7D32; }
+  .t-amber .tile-icon { background: #fff8e1; color: #E65100; }
+  .t-purple .tile-icon { background: #ede7f6; color: #4527A0; }
+  .t-red   .tile-icon { background: #ffebee; color: #B71C1C; }
+  .t-teal  .tile-icon { background: #e0f2f1; color: #00695C; }
+  .t-pink  .tile-icon { background: #fce4ec; color: #880E4F; }
+  .t-indigo .tile-icon { background: #e8eaf6; color: #283593; }
+
+  /* ---- BOTTOM GRID ---- */
+  .bottom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+  }
+
+  .card-head {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-title svg { color: var(--accent); }
+
+  .card-body { padding: 0; }
+
+  /* ---- SCHEDULE TABLE ---- */
+  .schedule-row {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    align-items: center;
+    padding: 12px 20px;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+
+  .schedule-row:last-child { border-bottom: none; }
+  .schedule-row:hover { background: var(--surface); }
+
+  .schedule-day {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+
+  .schedule-course {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .schedule-room {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .schedule-time {
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-align: left;
+    direction: ltr;
+    background: var(--surface-2);
+    padding: 3px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  /* ---- MESSAGES LIST ---- */
+  .msg-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .msg-row:last-child { border-bottom: none; }
+  .msg-row:hover { background: var(--surface); }
+
+  .msg-row.unread { background: var(--accent-light); }
+  .msg-row.unread:hover { background: #d0e8fa; }
+
+  .msg-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--navy-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .msg-content { flex: 1; min-width: 0; }
+
+  .msg-sender {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .msg-preview {
+    font-size: 12px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 2px;
+  }
+
+  .msg-time {
+    font-size: 11px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .unread-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  /* ---- PROFILE SIDEBAR BOTTOM ---- */
+  .sidebar-profile {
+    margin: 0 12px 0;
+    padding: 14px;
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+  }
+
+  .profile-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+  }
+
+  .profile-id {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .profile-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--accent-light);
+    color: var(--accent-mid);
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-top: 6px;
+  }
+
+  /* ---- NOTIFICATION DROPDOWN ---- */
+  .notif-panel {
+    display: none;
+    position: fixed;
+    top: 68px;
+    left: 24px;
+    width: 340px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    z-index: 200;
+    overflow: hidden;
+  }
+
+  .notif-panel.open { display: block; }
+
+  .notif-head {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .notif-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+  }
+
+  .notif-item:last-child { border-bottom: none; }
+  .notif-item:hover { background: var(--surface); }
+
+  .notif-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+
+  .notif-dot.info { background: var(--accent); }
+  .notif-dot.warn { background: var(--gold); }
+
+  .notif-text { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+  .notif-text strong { color: var(--text-primary); font-weight: 500; }
+  .notif-when { font-size: 10px; color: var(--text-muted); margin-top: 3px; }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .tiles-grid { grid-template-columns: repeat(3, 1fr); }
+    .bottom-grid { grid-template-columns: 1fr; }
+    .main { padding: 20px 16px; }
+  }
+
+  @media (max-width: 560px) {
+    .tiles-grid { grid-template-columns: repeat(2, 1fr); }
+    .topbar-search { display: none; }
+  }
+
+  /* ---- PRINT HIDE ---- */
+  @media print {
+    .topbar, .sidebar { display: none; }
+    .main { padding: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== TOPBAR ===== -->
+<header class="topbar">
+  <a class="topbar-brand" href="#">
+    <div class="topbar-logo">م</div>
+    <div class="topbar-title">
+      مرکز آموزش علمی-کاربردی
+      <span>مبارکه</span>
+    </div>
+  </a>
+
+  <div class="topbar-spacer"></div>
+
+  <div class="topbar-search">
+    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" placeholder="جستجو در منو..." id="searchInput" oninput="filterMenu(this.value)">
+  </div>
+
+  <div class="topbar-actions">
+    <button class="topbar-btn" title="پیام‌ها" onclick="toggleNotif()" id="notifBtn">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="badge-dot"></span>
+    </button>
+    <button class="topbar-btn" title="راهنما">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+    </button>
+
+    <div class="topbar-divider"></div>
+
+    <div class="user-chip">
+      <div class="user-avatar">هپ</div>
+      <span class="user-name">هادی پاشائی</span>
+      <svg width="14" height="14" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+
+    <button class="topbar-btn" title="خروج">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ===== NOTIFICATION PANEL ===== -->
+<div class="notif-panel" id="notifPanel">
+  <div class="notif-head">
+    پیام‌ها
+    <span style="font-size:11px;color:var(--accent);cursor:pointer;font-weight:400">همه را خوانده‌ام</span>
+  </div>
+  <div class="notif-item">
+    <div class="notif-dot info"></div>
+    <div class="notif-content">
+      <div class="notif-text"><strong>واحد آموزش:</strong> زمان انتخاب واحد ترم جدید از ۱۵ تیر آغاز می‌شود.</div>
+      <div class="notif-when">۲ ساعت پیش</div>
+    </div>
+  </div>
+  <div class="notif-item">
+    <div class="notif-dot warn"></div>
+    <div class="notif-content">
+      <div class="notif-text"><strong>مالی:</strong> بدهی شهریه ترم جاری تا پایان ماه قابل پرداخت است.</div>
+      <div class="notif-when">دیروز</div>
+    </div>
+  </div>
+  <div class="notif-item">
+    <div class="notif-dot info"></div>
+    <div class="notif-content">
+      <div class="notif-text"><strong>استاد محمدی:</strong> جلسه ارزشیابی درس شنبه برگزار می‌شود.</div>
+      <div class="notif-when">۳ روز پیش</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== LAYOUT ===== -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div style="padding:0 12px 16px;border-bottom:1px solid var(--border);margin-bottom:12px;">
+      <div class="sidebar-profile">
+        <div class="profile-name">هادی پاشائی</div>
+        <div class="profile-id">۵۴۱۰۳۲۳۱۷۳</div>
+        <div class="profile-badge">
+          <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          دانشجو
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">عمومی</div>
+      <a class="nav-item active" href="#">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        میزکار
+      </a>
+      <a class="nav-item" href="#">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        اطلاعات شخصی
+      </a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">تحصیلی</div>
+      <a class="nav-item" href="#" id="nav-enroll">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        انتخاب واحد
+      </a>
+      <a class="nav-item" href="#">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        کارنامه موقت
+      </a>
+      <a class="nav-item" href="#">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        کارنامه
+      </a>
+      <a class="nav-item" href="#">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        برنامه هفتگی
+      </a>
+      <a class="nav-item" href="#">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        نیمرخ تحصیلی
+      </a>
+      <a class="nav-item" href="#">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        ارزشیابی نیمسال
+        <span class="nav-badge">جدید</span>
+      </a>
+      <a class="nav-item" href="#">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        کارت امتحان
+      </a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">درخواست‌ها</div>
+      <a class="nav-item" href="#">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        تغییر رشته
+      </a>
+      <a class="nav-item" href="#">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+        انتقالی
+      </a>
+      <a class="nav-item" href="#">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        انصراف
+      </a>
+      <a class="nav-item" href="#">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        فارغ‌التحصیلی
+      </a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">مالی</div>
+      <a class="nav-item" href="#">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        تسویه حساب
+      </a>
+      <a class="nav-item" href="#">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        کارنامه مالی
+      </a>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main" id="mainContent">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="page-greeting">خوش آمدید، هادی جان 👋</div>
+      <div class="page-sub">یکشنبه، ۲۵ خرداد ۱۴۰۴ &nbsp;·&nbsp; ترم تابستان ۱۴۰۴</div>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-icon blue">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="stat-value">۱۴۲</div>
+        <div class="stat-label">واحد گذرانده</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon green">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="stat-value">۱۷.۴</div>
+        <div class="stat-label">میانگین کل</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon amber">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <div class="stat-value">۵</div>
+        <div class="stat-label">درس این ترم</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon purple">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="stat-value">۷</div>
+        <div class="stat-label">روز تا امتحان</div>
+      </div>
+    </div>
+
+    <!-- Quick Access -->
+    <div class="section-header">
+      <div class="section-title">دسترسی سریع</div>
+      <a class="section-link" href="#">همه بخش‌ها <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></a>
+    </div>
+
+    <div class="tiles-grid" id="tilesGrid">
+      <div class="tile t-blue" onclick="navigate('/StudentLessons/StudentLessonRoadMapRegister')">
+        <div class="tile-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <div class="tile-label">انتخاب واحد</div>
+      </div>
+      <div class="tile t-green" onclick="navigate('/Grading/RevisionWorkbook')">
+        <div class="tile-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+        <div class="tile-label">کارنامه موقت</div>
+      </div>
+      <div class="tile t-amber" onclick="navigate('/UastWorkbooks')">
+        <div class="tile-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div class="tile-label">کارنامه</div>
+      </div>
+      <div class="tile t-purple" onclick="navigate('/StudentLessons/StudentWeeklyProgramPrint')">
+        <div class="tile-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <div class="tile-label">تأیید انتخاب واحد</div>
+      </div>
+      <div class="tile t-red" onclick="navigate('/Home/UASTStartPayDebit')">
+        <div class="tile-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+        <div class="tile-label">تسویه حساب</div>
+      </div>
+      <div class="tile t-teal" onclick="navigate('/StudentLessonCatalogs')">
+        <div class="tile-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <div class="tile-label">نیمرخ تحصیلی</div>
+      </div>
+      <div class="tile t-indigo" onclick="navigate('/ExamCards/StudentExamCard')">
+        <div class="tile-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+        <div class="tile-label">کارت امتحان</div>
+      </div>
+      <div class="tile t-pink" onclick="navigate('/StudentForms')">
+        <div class="tile-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <div class="tile-label">ارزشیابی نیمسال</div>
+      </div>
+    </div>
+
+    <!-- Bottom Grid -->
+    <div class="bottom-grid">
+
+      <!-- Weekly Schedule -->
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            برنامه هفتگی
+          </div>
+          <a class="section-link" href="#">مشاهده کامل</a>
+        </div>
+        <div class="card-body">
+          <div class="schedule-row">
+            <div class="schedule-day">شنبه</div>
+            <div>
+              <div class="schedule-course">ریاضی مهندسی</div>
+              <div class="schedule-room">کلاس ۲۰۱</div>
+            </div>
+            <div class="schedule-time">08:00 - 10:00</div>
+          </div>
+          <div class="schedule-row">
+            <div class="schedule-day">یکشنبه</div>
+            <div>
+              <div class="schedule-course">برنامه‌نویسی پیشرفته</div>
+              <div class="schedule-room">آزمایشگاه ۱</div>
+            </div>
+            <div class="schedule-time">10:00 - 12:00</div>
+          </div>
+          <div class="schedule-row">
+            <div class="schedule-day">دوشنبه</div>
+            <div>
+              <div class="schedule-course">پایگاه داده</div>
+              <div class="schedule-room">کلاس ۱۰۵</div>
+            </div>
+            <div class="schedule-time">08:00 - 10:00</div>
+          </div>
+          <div class="schedule-row">
+            <div class="schedule-day">سه‌شنبه</div>
+            <div>
+              <div class="schedule-course">شبکه‌های کامپیوتری</div>
+              <div class="schedule-room">آزمایشگاه ۳</div>
+            </div>
+            <div class="schedule-time">14:00 - 16:00</div>
+          </div>
+          <div class="schedule-row">
+            <div class="schedule-day">چهارشنبه</div>
+            <div>
+              <div class="schedule-course">مهندسی نرم‌افزار</div>
+              <div class="schedule-room">کلاس ۳۰۲</div>
+            </div>
+            <div class="schedule-time">10:00 - 12:00</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Messages -->
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            پیام‌های دریافتی
+          </div>
+          <a class="section-link" href="#">همه پیام‌ها</a>
+        </div>
+        <div class="card-body">
+          <div class="msg-row unread">
+            <div class="unread-dot"></div>
+            <div class="msg-avatar">آ</div>
+            <div class="msg-content">
+              <div class="msg-sender">واحد آموزش</div>
+              <div class="msg-preview">زمان انتخاب واحد ترم جدید اعلام شد...</div>
+            </div>
+            <div class="msg-time">امروز</div>
+          </div>
+          <div class="msg-row unread">
+            <div class="unread-dot"></div>
+            <div class="msg-avatar">م</div>
+            <div class="msg-content">
+              <div class="msg-sender">استاد محمدی</div>
+              <div class="msg-preview">جلسه ارزشیابی شنبه برگزار می‌شود لطفا...</div>
+            </div>
+            <div class="msg-time">دیروز</div>
+          </div>
+          <div class="msg-row">
+            <div style="width:8px;flex-shrink:0"></div>
+            <div class="msg-avatar" style="background:#4a5568">م</div>
+            <div class="msg-content">
+              <div class="msg-sender">واحد مالی</div>
+              <div class="msg-preview">یادآوری: بدهی شهریه باید تسویه شود...</div>
+            </div>
+            <div class="msg-time">۳ روز پیش</div>
+          </div>
+          <div class="msg-row">
+            <div style="width:8px;flex-shrink:0"></div>
+            <div class="msg-avatar" style="background:#00695C">ر</div>
+            <div class="msg-content">
+              <div class="msg-sender">مدیریت آموزش</div>
+              <div class="msg-preview">امتحانات پایان ترم از تاریخ ۱۴۰۴/۰۴/۱۰...</div>
+            </div>
+            <div class="msg-time">۵ روز پیش</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /bottom-grid -->
+
+  </main>
+</div><!-- /layout -->
+
+<script>
+  function navigate(url) {
+    console.log('navigating to', url);
+  }
+
+  function toggleNotif() {
+    var p = document.getElementById('notifPanel');
+    p.classList.toggle('open');
+  }
+
+  document.addEventListener('click', function(e) {
+    var panel = document.getElementById('notifPanel');
+    var btn = document.getElementById('notifBtn');
+    if (!panel.contains(e.target) && !btn.contains(e.target)) {
+      panel.classList.remove('open');
+    }
+  });
+
+  function filterMenu(q) {
+    q = q.trim().toLowerCase();
+    var tiles = document.querySelectorAll('#tilesGrid .tile');
+    tiles.forEach(function(t) {
+      var label = t.querySelector('.tile-label').textContent.toLowerCase();
+      t.style.display = (!q || label.includes(q)) ? '' : 'none';
+    });
+    var navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(function(n) {
+      var text = n.textContent.trim().toLowerCase();
+      n.style.display = (!q || text.includes(q)) ? '' : 'none';
+    });
+  }
+
+  document.querySelectorAll('.nav-item').forEach(function(item) {
+    item.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelectorAll('.nav-item').forEach(function(i){ i.classList.remove('active'); });
+      this.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
